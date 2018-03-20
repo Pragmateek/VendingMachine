@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Data", "Vend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.LombardOdier", "VendingMachine.LombardOdier\VendingMachine.LombardOdier.csproj", "{1AD09F35-E013-4FF3-8D74-8CB015D95EA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.UI.Controls", "VendingMachine.UI.Controls\VendingMachine.UI.Controls.csproj", "{3BF17C3D-8AB1-47C4-8FFE-191B7B10C6F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.UI.Client", "VendingMachine.UI.Client\VendingMachine.UI.Client.csproj", "{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{1AD09F35-E013-4FF3-8D74-8CB015D95EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD09F35-E013-4FF3-8D74-8CB015D95EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AD09F35-E013-4FF3-8D74-8CB015D95EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF17C3D-8AB1-47C4-8FFE-191B7B10C6F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF17C3D-8AB1-47C4-8FFE-191B7B10C6F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF17C3D-8AB1-47C4-8FFE-191B7B10C6F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF17C3D-8AB1-47C4-8FFE-191B7B10C6F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
