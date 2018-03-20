@@ -1,0 +1,8 @@
+*.dll
+*.exe
+*.pdb
+*.lock
+packages/
+obj/
+bin/
+.vs/
