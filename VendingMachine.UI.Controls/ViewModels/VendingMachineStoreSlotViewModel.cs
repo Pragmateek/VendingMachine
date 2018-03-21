@@ -22,7 +22,9 @@ namespace VendingMachine.UI.Controls.ViewModels
             }
         }
 
-        public string SlotProductImagePath => $"./Images/Products/{Slot.CatalogEntry.Product.Name}.png";
+        public string SlotProductImagePath => $"./Images/Products/{Slot.CatalogEntry.Product.Name.Replace(" ", "")}.png";
+
+        public string ProductNameText => Slot.CatalogEntry.Product.Name.ToUpperInvariant();
 
         public string ProductPriceText => Slot.CatalogEntry.Price.ToString();
 

@@ -22,7 +22,12 @@ namespace VendingMachine.Business.Implementation
             Capacity = capacity;
         }
 
-        public void Feed(IEnumerable<IVendingMachineItem> newItems)
+        public void Store(IVendingMachineItem newItem)
+        {
+            Store(new[] { newItem });
+        }
+
+        public void Store(IEnumerable<IVendingMachineItem> newItems)
         {
             var firstWrongProductItem = newItems.FirstOrDefault(newItem => newItem.Product != CatalogEntry.Product);
 

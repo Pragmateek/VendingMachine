@@ -51,7 +51,7 @@ namespace VendingMachine.UI.Client
             var slot = new VendingMachineStoreSlot(catalogEntry, 10);
 
             var items = Enumerable.Range(1, 5).Select(_ => new VendingMachineItem(VendingMachineProductsRepository.Fanta));
-            slot.Feed(items);
+            slot.Store(items);
 
             var vendingMachineStoreSlotViewModel = new VendingMachineStoreSlotViewModel(slot);
             var vendingMachineStoreSlotView = new VendingMachineStoreSlotView(vendingMachineStoreSlotViewModel)
@@ -66,10 +66,31 @@ namespace VendingMachine.UI.Client
             UI.ShowDialog();
         }
 
+        static void ShowVendingMachineStore()
+        {
+            var vendingMachine = new LombardOdierVendingMachine();
+            var items = VendingMachineItemsFactory.Make(VendingMachineProductsRepository.Evian, 7)
+                .Then(VendingMachineProductsRepository.CocaCola, 5)
+                .Then(VendingMachineProductsRepository.Fanta, 6);
+            vendingMachine.Feed(items);
+
+            var vendingMachineStoreViewModel = new VendingMachineStoreViewModel(vendingMachine.Store);
+            var vendingMachineStoreView = new VendingMachineStoreView(vendingMachineStoreViewModel)
+            {
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var UI = new Form();
+            UI.Controls.Add(vendingMachineStoreView);
+
+            UI.ShowDialog();
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
-            ShowVendingMachineStoreSlot();
+            ShowVendingMachineStore();
         }
     }
 }

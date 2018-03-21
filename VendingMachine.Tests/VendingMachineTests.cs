@@ -12,5 +12,11 @@ namespace VendingMachine.Tests
         {
             
         }
+
+        [TestMethod]
+        public void ShouldReturnTheFirstFedItemForAGivenProduct()
+        {
+
+        }
     }
 }

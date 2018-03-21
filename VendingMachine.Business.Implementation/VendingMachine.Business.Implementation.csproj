@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VendingMachineItemsFactory.cs" />
     <Compile Include="CoinsFactory.cs" />
     <Compile Include="CoinType.cs" />
     <Compile Include="Coin.cs" />

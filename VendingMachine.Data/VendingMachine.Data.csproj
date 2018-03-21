@@ -45,6 +45,7 @@
     <Compile Include="PricesExtensions.cs" />
     <Compile Include="VendingMachineProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VendingMachinesCatalogsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine.Business.Implementation\VendingMachine.Business.Implementation.csproj">

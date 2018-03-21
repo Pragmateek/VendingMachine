@@ -6,11 +6,11 @@ namespace VendingMachine.Business.Implementation
 {
     public class CoinsFactory
     {
-        public static IEnumerable<ICoin> Get(ICoinType coinType, uint count)
+        public static IEnumerable<ICoin> Get(ICoinType coinType, uint quantity)
         {
             var coins = new List<ICoin>();
 
-            for (uint i = 1; i <= count; i++)
+            for (uint i = 1; i <= quantity; i++)
             {
                 var coin = new Coin(coinType);
 

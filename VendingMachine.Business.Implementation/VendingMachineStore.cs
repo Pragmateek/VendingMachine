@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Business.Implementation
@@ -7,6 +9,15 @@ namespace VendingMachine.Business.Implementation
     public class VendingMachineStore : IVendingMachineStore
     {
         private readonly IList<IVendingMachineStoreSlot> slots = new List<IVendingMachineStoreSlot>();
+
+        public VendingMachineStore(IVendingMachineCatalog catalog, uint capacity)
+        {
+            foreach (var catalogEntry in catalog)
+            {
+                var slot = new VendingMachineStoreSlot(catalogEntry, capacity);
+                slots.Add(slot);
+            }
+        }
 
         public void Add(IEnumerable<IVendingMachineItem> items)
         {
@@ -18,7 +29,14 @@ namespace VendingMachine.Business.Implementation
 
         public void Add(IVendingMachineItem item)
         {
-            //items.Add(item);
+            var itemProductSlot = slots.SingleOrDefault(slot => slot.CatalogEntry.Product == item.Product);
+
+            if (itemProductSlot == null)
+            {
+                throw new Exception($"This store can't handle '{item.Product}'!");
+            }
+
+            itemProductSlot.Store(item);
         }
 
         public IEnumerator<IVendingMachineStoreSlot> GetEnumerator()

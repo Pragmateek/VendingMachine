@@ -5,7 +5,7 @@ namespace VendingMachine.Data
 {
     public class VendingMachineProductsRepository
     {
-        public static readonly IVendingMachineProduct Water = new VendingMachineProduct("Water");
+        public static readonly IVendingMachineProduct Evian = new VendingMachineProduct("Evian");
         public static readonly IVendingMachineProduct CocaCola = new VendingMachineProduct("Coca Cola");
         public static readonly IVendingMachineProduct Fanta = new VendingMachineProduct("Fanta");
     }

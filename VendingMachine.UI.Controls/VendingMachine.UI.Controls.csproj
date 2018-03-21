@@ -44,6 +44,9 @@
   <ItemGroup>
     <Compile Include="ViewModels\VendingMachineStoreSlotViewModel.cs" />
     <Compile Include="ViewModels\VendingMachineStoreViewModel.cs" />
+    <Compile Include="Views\VendingMachineStoreView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\VendingMachineStoreSlotView.cs">
       <SubType>UserControl</SubType>
     </Compile>

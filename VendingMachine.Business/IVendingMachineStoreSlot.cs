@@ -10,5 +10,8 @@ namespace VendingMachine.Business.Contracts
         uint Count { get; }
 
         event EventHandler ItemsChanged;
+
+        void Store(IVendingMachineItem newItem);
+        void Store(IEnumerable<IVendingMachineItem> newItems);
     }
 }
