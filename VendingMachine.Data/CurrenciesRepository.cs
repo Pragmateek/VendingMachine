@@ -1,4 +1,4 @@
-﻿using VendingMachine.Business;
+﻿using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 
 namespace VendingMachine.Data

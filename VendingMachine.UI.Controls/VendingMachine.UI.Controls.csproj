@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\VendingMachineStoreSlotViewModel.cs" />
+    <Compile Include="ViewModels\VendingMachineStoreViewModel.cs" />
+    <Compile Include="Views\VendingMachineStoreSlotView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\CashRegisterSlotView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -53,6 +58,15 @@
     <Compile Include="ViewModels\CashRegisterSlotViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Products\CocaCola.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Products\Evian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Products\Fanta.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Coins\10SwissFrancCents.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

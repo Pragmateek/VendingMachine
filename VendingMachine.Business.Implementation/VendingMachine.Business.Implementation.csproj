@@ -49,9 +49,12 @@
     <Compile Include="Currency.cs" />
     <Compile Include="VendingMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VendingMachineInventoryItem.cs" />
+    <Compile Include="VendingMachineCatalog.cs" />
+    <Compile Include="VendingMachineCatalogEntry.cs" />
+    <Compile Include="VendingMachineProduct.cs" />
     <Compile Include="VendingMachineItem.cs" />
-    <Compile Include="VendingMachineInventory.cs" />
+    <Compile Include="VendingMachineStoreSlot.cs" />
+    <Compile Include="VendingMachineStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine.Business\VendingMachine.Business.Contracts.csproj">

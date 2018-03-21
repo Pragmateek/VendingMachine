@@ -11,13 +11,13 @@ namespace VendingMachine.Business.Implementation
     {
         public LombardOdierVendingMachine()
         {
-            var water = new VendingMachineInventoryItem(VendingMachineItemsRepository.Water, 1.10m.CHF());
-            var CocaCola = new VendingMachineInventoryItem(VendingMachineItemsRepository.CocaCola, 1.20m.CHF());
-            var Fanta = new VendingMachineInventoryItem(VendingMachineItemsRepository.Fanta, 1.60m.CHF());
+            //var water = new VendingMachineInventoryItem(VendingMachineItemsRepository.Water, 1.10m.CHF());
+            //var CocaCola = new VendingMachineInventoryItem(VendingMachineItemsRepository.CocaCola, 1.20m.CHF());
+            //var Fanta = new VendingMachineInventoryItem(VendingMachineItemsRepository.Fanta, 1.60m.CHF());
 
-            availableItems.Add(water);
-            availableItems.Add(CocaCola);
-            availableItems.Add(Fanta);
+            //availableItems.Add(water);
+            //availableItems.Add(CocaCola);
+            //availableItems.Add(Fanta);
         }
     }
 }

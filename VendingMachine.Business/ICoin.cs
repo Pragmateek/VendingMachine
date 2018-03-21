@@ -1,4 +1,4 @@
-﻿namespace VendingMachine.Business
+﻿namespace VendingMachine.Business.Contracts
 {
     public interface ICoin
     {

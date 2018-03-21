@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VendingMachine.Business
+namespace VendingMachine.Business.Contracts
 {
     public interface ICashRegister
     {

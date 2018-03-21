@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using VendingMachine.Business;
+using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.UI.Controls.ViewModels
 {

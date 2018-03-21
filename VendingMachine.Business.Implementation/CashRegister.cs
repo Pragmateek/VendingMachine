@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VendingMachine.Business;
+using VendingMachine.Business.Contracts;
 
-namespace VendingMachine.Implementation
+namespace VendingMachine.Business.Implementation
 {
     public class CashRegister : ICashRegister
     {

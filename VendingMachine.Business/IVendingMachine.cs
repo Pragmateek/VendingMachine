@@ -1,8 +1,10 @@
-﻿namespace VendingMachine.Business
+﻿namespace VendingMachine.Business.Contracts
 {
     public interface IVendingMachine
     {
-        IVendingMachineInventory AvailableItems { get; }
+        uint Capacity { get; }
+
+        IVendingMachineStore AvailableItems { get; }
 
         ICurrency Currency { get; }
         decimal InsertedAmount { get; }

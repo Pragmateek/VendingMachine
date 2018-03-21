@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using VendingMachine.Business;
-using VendingMachine.Implementation;
+using VendingMachine.Business.Contracts;
+using VendingMachine.Business.Implementation;
 
 namespace VendingMachine.Data
 {

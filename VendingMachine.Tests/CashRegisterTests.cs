@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VendingMachine.Business;
 using VendingMachine.Data;
-using VendingMachine.Implementation;
+using VendingMachine.Business.Implementation;
 
 namespace VendingMachine.Tests
 {

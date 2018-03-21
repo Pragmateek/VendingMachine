@@ -1,15 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Business.Implementation
 {
     public class VendingMachine : IVendingMachine
     {
-        protected VendingMachineInventory availableItems = new VendingMachineInventory();
+        public uint Capacity { get; private set; }
 
-        public IVendingMachineInventory AvailableItems => availableItems;
+        protected VendingMachineStore availableItems = new VendingMachineStore();
+
+        public IVendingMachineStore AvailableItems => availableItems;
 
         public ICurrency Currency { get; private set; }
         public decimal InsertedAmount { get; private set; }
+
+        public IVendingMachine Feed(IEnumerable<IVendingMachineItem> items)
+        {
+            return this;
+        }
 
         public IVendingMachine Insert(ICoin coin)
         {

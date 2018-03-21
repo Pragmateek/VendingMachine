@@ -2,11 +2,11 @@
 
 namespace VendingMachine.Business.Implementation
 {
-    public class Currency : ICurrency
+    public class VendingMachineProduct : IVendingMachineProduct
     {
         public string Name { get; private set; }
 
-        public Currency(string name)
+        public VendingMachineProduct(string name)
         {
             Name = name;
         }

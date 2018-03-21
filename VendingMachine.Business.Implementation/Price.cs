@@ -1,4 +1,6 @@
-﻿namespace VendingMachine.Business.Implementation
+﻿using VendingMachine.Business.Contracts;
+
+namespace VendingMachine.Business.Implementation
 {
     public class Price : IPrice
     {
@@ -9,6 +11,11 @@
         {
             Currency = currency;
             Amount = amount;
+        }
+
+        public override string ToString()
+        {
+            return $"{Currency} {Amount}";
         }
     }
 }

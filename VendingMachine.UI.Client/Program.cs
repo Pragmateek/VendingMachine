@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using VendingMachine.Business.Implementation;
 using VendingMachine.Data;
-using VendingMachine.Implementation;
 using VendingMachine.UI.Controls;
 using VendingMachine.UI.Controls.ViewModels;
 
@@ -46,10 +43,33 @@ namespace VendingMachine.UI.Client
             UI.ShowDialog();
         }
 
+        static void ShowVendingMachineStoreSlot()
+        {
+            var FantaPrice = new Price(CurrenciesRepository.CHF, 1.60m);
+            var catalogEntry = new VendingMachineCatalogEntry(VendingMachineProductsRepository.Fanta, FantaPrice);
+
+            var slot = new VendingMachineStoreSlot(catalogEntry, 10);
+
+            var items = Enumerable.Range(1, 5).Select(_ => new VendingMachineItem(VendingMachineProductsRepository.Fanta));
+            slot.Feed(items);
+
+            var vendingMachineStoreSlotViewModel = new VendingMachineStoreSlotViewModel(slot);
+            var vendingMachineStoreSlotView = new VendingMachineStoreSlotView(vendingMachineStoreSlotViewModel)
+            {
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var UI = new Form();
+            UI.Controls.Add(vendingMachineStoreSlotView);
+
+            UI.ShowDialog();
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
-            ShowCashRegister();
+            ShowVendingMachineStoreSlot();
         }
     }
 }

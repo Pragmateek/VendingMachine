@@ -1,6 +1,6 @@
 ﻿namespace VendingMachine.Business.Contracts
 {
-    public interface ICurrency
+    public interface IVendingMachineProduct
     {
         string Name { get; }
     }

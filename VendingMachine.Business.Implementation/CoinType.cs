@@ -1,6 +1,6 @@
-﻿using VendingMachine.Business;
+﻿using VendingMachine.Business.Contracts;
 
-namespace VendingMachine.Implementation
+namespace VendingMachine.Business.Implementation
 {
     public class CoinType : ICoinType
     {

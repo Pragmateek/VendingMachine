@@ -7,8 +7,8 @@
     <ProjectGuid>{BF56C62F-97A7-495A-8FF8-956DD05E9272}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VendingMachine.Business</RootNamespace>
-    <AssemblyName>VendingMachine.Business</AssemblyName>
+    <RootNamespace>VendingMachine.Business.Contracts</RootNamespace>
+    <AssemblyName>VendingMachine.Business.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,8 +46,11 @@
     <Compile Include="ICoin.cs" />
     <Compile Include="ICurrency.cs" />
     <Compile Include="IPrice.cs" />
-    <Compile Include="IVendingMachineInventoryItem.cs" />
-    <Compile Include="IVendingMachineInventory.cs" />
+    <Compile Include="IVendingMachineCatalog.cs" />
+    <Compile Include="IVendingMachineCatalogEntry.cs" />
+    <Compile Include="IVendingMachineProduct.cs" />
+    <Compile Include="IVendingMachineStoreSlot.cs" />
+    <Compile Include="IVendingMachineStore.cs" />
     <Compile Include="IVendingMachineItem.cs" />
     <Compile Include="IVendingMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

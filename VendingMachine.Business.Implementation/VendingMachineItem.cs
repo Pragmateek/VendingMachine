@@ -1,12 +1,14 @@
-﻿namespace VendingMachine.Business.Implementation
+﻿using VendingMachine.Business.Contracts;
+
+namespace VendingMachine.Business.Implementation
 {
     public class VendingMachineItem : IVendingMachineItem
     {
-        public string Name { get; private set; }
+        public IVendingMachineProduct Product { get; private set; }
 
-        public VendingMachineItem(string name)
+        public VendingMachineItem(IVendingMachineProduct product)
         {
-            Name = name;
+            Product = product;
         }
     }
 }

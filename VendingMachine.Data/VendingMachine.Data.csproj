@@ -43,7 +43,7 @@
     <Compile Include="CoinsTypesRepository.cs" />
     <Compile Include="CurrenciesRepository.cs" />
     <Compile Include="PricesExtensions.cs" />
-    <Compile Include="VendingMachineItemsRepository.cs" />
+    <Compile Include="VendingMachineProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
