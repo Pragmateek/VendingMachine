@@ -46,6 +46,7 @@
     <Compile Include="ICoin.cs" />
     <Compile Include="ICurrency.cs" />
     <Compile Include="IPrice.cs" />
+    <Compile Include="IProductChoice.cs" />
     <Compile Include="IVendingMachineControlPanel.cs" />
     <Compile Include="IVendingMachineCatalog.cs" />
     <Compile Include="IVendingMachineCatalogEntry.cs" />
