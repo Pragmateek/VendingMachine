@@ -19,15 +19,15 @@ namespace VendingMachine.Business.Implementation
             }
         }
 
-        public void Add(IEnumerable<IVendingMachineItem> items)
+        public void Store(IEnumerable<IVendingMachineItem> items)
         {
             foreach (var item in items)
             {
-                Add(item);
+                Store(item);
             }
         }
 
-        public void Add(IVendingMachineItem item)
+        public void Store(IVendingMachineItem item)
         {
             var itemProductSlot = slots.SingleOrDefault(slot => slot.CatalogEntry.Product == item.Product);
 

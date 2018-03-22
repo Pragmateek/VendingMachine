@@ -2,18 +2,19 @@
 
 namespace VendingMachine.Business.Contracts
 {
+    /// <summary>
+    /// Acts as a facade for the underlying parts: store, cash-register, control-panel...
+    /// </summary>
     public interface IVendingMachine
     {
         uint Capacity { get; }
 
         IVendingMachineStore Store { get; }
+        ICashRegister CashRegister { get; }
+        IVendingMachineControlPanel ControlPanel { get; }
 
         ICurrency Currency { get; }
-        decimal InsertedAmount { get; }
-
-        IVendingMachine Insert(ICoin coin);
-        IEnumerable<ICoin> Refund();
-
-        bool TryBuyItem(IVendingMachineItem item);
+        
+        bool TryBuyItem(IVendingMachineProduct product);
     }
 }

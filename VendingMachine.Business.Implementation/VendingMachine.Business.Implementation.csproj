@@ -54,6 +54,7 @@
     <Compile Include="VendingMachineCatalogEntry.cs" />
     <Compile Include="VendingMachineProduct.cs" />
     <Compile Include="VendingMachineItem.cs" />
+    <Compile Include="VendingMachineControlPanel.cs" />
     <Compile Include="VendingMachineStoreSlot.cs" />
     <Compile Include="VendingMachineStore.cs" />
   </ItemGroup>
