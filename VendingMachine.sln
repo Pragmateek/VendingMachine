@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Business.Contracts", "VendingMachine.Business\VendingMachine.Business.Contracts.csproj", "{BF56C62F-97A7-495A-8FF8-956DD05E9272}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Business.Contracts", "VendingMachine.Business.Contracts\VendingMachine.Business.Contracts.csproj", "{BF56C62F-97A7-495A-8FF8-956DD05E9272}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Business.Implementation", "VendingMachine.Business.Implementation\VendingMachine.Business.Implementation.csproj", "{84601CA9-CB96-4D7B-9981-980A755057EB}"
 EndProject
