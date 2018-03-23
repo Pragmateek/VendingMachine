@@ -3,12 +3,12 @@ using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.UI.Controls.ViewModels
 {
-    public class VendingMachineStoreSlotViewModel : INotifyPropertyChanged
+    public class StoreSlotViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private IVendingMachineStoreSlot slot;
-        public IVendingMachineStoreSlot Slot
+        private IStoreSlot slot;
+        public IStoreSlot Slot
         {
             get { return slot; }
             set
@@ -30,7 +30,7 @@ namespace VendingMachine.UI.Controls.ViewModels
 
         public string CountCapacityText => $"{Slot.Count} / {Slot.Capacity}";
 
-        public VendingMachineStoreSlotViewModel(IVendingMachineStoreSlot slot)
+        public StoreSlotViewModel(IStoreSlot slot)
         {
             this.slot = slot;
         }

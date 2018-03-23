@@ -6,12 +6,12 @@ using VendingMachine.UI.Controls.ViewModels;
 
 namespace VendingMachine.UI.Controls
 {
-    public class VendingMachineStoreView : UserControl, INotifyPropertyChanged
+    public class StoreView : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private VendingMachineStoreViewModel model;
-        public VendingMachineStoreViewModel Model
+        private StoreViewModel model;
+        public StoreViewModel Model
         {
             get { return model; }
             set
@@ -41,7 +41,7 @@ namespace VendingMachine.UI.Controls
             {
                 slotsViewsLayout.ColumnCount += 1;
 
-                var slotViewModel = new VendingMachineStoreSlotViewModel(slot);
+                var slotViewModel = new StoreSlotViewModel(slot);
                 var slotView = new VendingMachineStoreSlotView(slotViewModel)
                 {
                     Dock = DockStyle.Fill
@@ -58,7 +58,7 @@ namespace VendingMachine.UI.Controls
             }
         }
 
-        public VendingMachineStoreView()
+        public StoreView()
         {
             slotsViewsLayout  = new TableLayoutPanel
             {
@@ -71,7 +71,7 @@ namespace VendingMachine.UI.Controls
             this.Controls.Add(slotsViewsLayout);
         }
 
-        public VendingMachineStoreView(VendingMachineStoreViewModel model) : this()
+        public StoreView(StoreViewModel model) : this()
         {
             Model = model;
         }

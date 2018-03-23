@@ -3,12 +3,12 @@ using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.UI.Controls.ViewModels
 {
-    public class VendingMachineStoreViewModel : INotifyPropertyChanged
+    public class StoreViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private IVendingMachineStore store;
-        public IVendingMachineStore Store
+        private IStore store;
+        public IStore Store
         {
             get { return store; }
             set
@@ -21,7 +21,7 @@ namespace VendingMachine.UI.Controls.ViewModels
             }
         }
 
-        public VendingMachineStoreViewModel(IVendingMachineStore store)
+        public StoreViewModel(IStore store)
         {
             this.store = store;
         }

@@ -5,7 +5,7 @@ namespace VendingMachine.Business.Implementation
     public class LombardOdierVendingMachine : VendingMachine
     {
         public LombardOdierVendingMachine() :
-            base(VendingMachinesCatalogsRepository.GetLombardOdierCatalog(), 10)
+            base(CatalogsRepository.GetLombardOdierCatalog(), 10, CoinsTypesRepository.SwissFrancCoins, 100)
         {
         }
     }

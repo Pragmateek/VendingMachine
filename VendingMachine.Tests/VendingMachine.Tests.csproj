@@ -57,13 +57,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VendingMachine.Business.Contracts\VendingMachine.Business.Contracts.csproj">
+      <Project>{bf56c62f-97a7-495a-8ff8-956dd05e9272}</Project>
+      <Name>VendingMachine.Business.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VendingMachine.Business.Implementation\VendingMachine.Business.Implementation.csproj">
       <Project>{84601ca9-cb96-4d7b-9981-980a755057eb}</Project>
       <Name>VendingMachine.Business.Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VendingMachine.Business\VendingMachine.Business.Contracts.csproj">
-      <Project>{bf56c62f-97a7-495a-8ff8-956dd05e9272}</Project>
-      <Name>VendingMachine.Business.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\VendingMachine.Data\VendingMachine.Data.csproj">
       <Project>{2ee5aca9-2706-4ae2-94e5-863de37f4077}</Project>

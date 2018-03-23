@@ -6,28 +6,28 @@ using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Business.Implementation
 {
-    public class VendingMachineStoreSlot : IVendingMachineStoreSlot
+    public class StoreSlot : IStoreSlot
     {
-        private readonly Queue<IVendingMachineItem> items = new Queue<IVendingMachineItem>();
+        private readonly Queue<IItem> items = new Queue<IItem>();
 
         public event EventHandler ItemsChanged = delegate { };
 
-        public IVendingMachineCatalogEntry CatalogEntry { get; private set; }
+        public ICatalogEntry CatalogEntry { get; private set; }
         public uint Capacity { get; private set; }
         public uint Count => (uint)items.Count;
 
-        public VendingMachineStoreSlot(IVendingMachineCatalogEntry catalogEntry, uint capacity)
+        public StoreSlot(ICatalogEntry catalogEntry, uint capacity)
         {
             CatalogEntry = catalogEntry;
             Capacity = capacity;
         }
 
-        public void Store(IVendingMachineItem newItem)
+        public void Store(IItem newItem)
         {
             Store(new[] { newItem });
         }
 
-        public void Store(IEnumerable<IVendingMachineItem> newItems)
+        public void Store(IEnumerable<IItem> newItems)
         {
             var firstWrongProductItem = newItems.FirstOrDefault(newItem => newItem.Product != CatalogEntry.Product);
 
@@ -44,12 +44,12 @@ namespace VendingMachine.Business.Implementation
             ItemsChanged(this, EventArgs.Empty);
         }
 
-        public void Take(IVendingMachineItem product)
+        public void Take(IItem product)
         {
 
         }
 
-        public IEnumerator<IVendingMachineItem> GetEnumerator()
+        public IEnumerator<IItem> GetEnumerator()
         {
             return items.GetEnumerator();
         }

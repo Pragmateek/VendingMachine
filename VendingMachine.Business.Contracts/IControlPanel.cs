@@ -2,15 +2,16 @@
 
 namespace VendingMachine.Business.Contracts
 {
-    public interface IVendingMachineControlPanel
+    public interface IControlPanel
     {
-        decimal InsertedAmount { get; }
+        IEnumerable<ICoinType> AcceptedCoinsTypes { get; }
+        IEnumerable<ICoin> InsertedCoins { get; }
 
         IEnumerable<IProductChoice> ProductsChoices { get; }
 
         void Insert(ICoin coin);
         IEnumerable<ICoin> Refund();
 
-        bool TryBuy(IVendingMachineProduct product);
+        bool TryBuy(IProduct product);
     }
 }

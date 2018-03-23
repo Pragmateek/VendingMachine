@@ -47,13 +47,13 @@
     <Compile Include="ICurrency.cs" />
     <Compile Include="IPrice.cs" />
     <Compile Include="IProductChoice.cs" />
-    <Compile Include="IVendingMachineControlPanel.cs" />
-    <Compile Include="IVendingMachineCatalog.cs" />
-    <Compile Include="IVendingMachineCatalogEntry.cs" />
-    <Compile Include="IVendingMachineProduct.cs" />
-    <Compile Include="IVendingMachineStoreSlot.cs" />
-    <Compile Include="IVendingMachineStore.cs" />
-    <Compile Include="IVendingMachineItem.cs" />
+    <Compile Include="IControlPanel.cs" />
+    <Compile Include="ICatalog.cs" />
+    <Compile Include="ICatalogEntry.cs" />
+    <Compile Include="IProduct.cs" />
+    <Compile Include="IStoreSlot.cs" />
+    <Compile Include="IStore.cs" />
+    <Compile Include="IItem.cs" />
     <Compile Include="IVendingMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

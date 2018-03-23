@@ -46,14 +46,14 @@ namespace VendingMachine.UI.Client
         static void ShowVendingMachineStoreSlot()
         {
             var FantaPrice = new Price(CurrenciesRepository.CHF, 1.60m);
-            var catalogEntry = new VendingMachineCatalogEntry(VendingMachineProductsRepository.Fanta, FantaPrice);
+            var catalogEntry = new CatalogEntry(ProductsRepository.Fanta, FantaPrice);
 
-            var slot = new VendingMachineStoreSlot(catalogEntry, 10);
+            var slot = new StoreSlot(catalogEntry, 10);
 
-            var items = Enumerable.Range(1, 5).Select(_ => new VendingMachineItem(VendingMachineProductsRepository.Fanta));
+            var items = Enumerable.Range(1, 5).Select(_ => new Item(ProductsRepository.Fanta));
             slot.Store(items);
 
-            var vendingMachineStoreSlotViewModel = new VendingMachineStoreSlotViewModel(slot);
+            var vendingMachineStoreSlotViewModel = new StoreSlotViewModel(slot);
             var vendingMachineStoreSlotView = new VendingMachineStoreSlotView(vendingMachineStoreSlotViewModel)
             {
                 Dock = DockStyle.Fill,
@@ -69,13 +69,13 @@ namespace VendingMachine.UI.Client
         static void ShowVendingMachineStore()
         {
             var vendingMachine = new LombardOdierVendingMachine();
-            var items = VendingMachineItemsFactory.Make(VendingMachineProductsRepository.Evian, 7)
-                .Then(VendingMachineProductsRepository.CocaCola, 5)
-                .Then(VendingMachineProductsRepository.Fanta, 6);
+            var items = ItemsFactory.Make(ProductsRepository.Evian, 7)
+                .Then(ProductsRepository.CocaCola, 5)
+                .Then(ProductsRepository.Fanta, 6);
             vendingMachine.Feed(items);
 
-            var vendingMachineStoreViewModel = new VendingMachineStoreViewModel(vendingMachine.Store);
-            var vendingMachineStoreView = new VendingMachineStoreView(vendingMachineStoreViewModel)
+            var vendingMachineStoreViewModel = new StoreViewModel(vendingMachine.Store);
+            var vendingMachineStoreView = new StoreView(vendingMachineStoreViewModel)
             {
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.FixedSingle
@@ -87,10 +87,27 @@ namespace VendingMachine.UI.Client
             UI.ShowDialog();
         }
 
+        static void ShowVendingMachineControlPanel()
+        {
+            var vendingMachine = new LombardOdierVendingMachine();
+
+            var controlPanelViewModel = new ControlPanelViewModel(vendingMachine.ControlPanel);
+            var controlPanelView = new ControlPanelView(controlPanelViewModel)
+            {
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var UI = new Form();
+            UI.Controls.Add(controlPanelView);
+
+            UI.ShowDialog();
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
-            ShowVendingMachineStore();
+            ShowVendingMachineControlPanel();
         }
     }
 }

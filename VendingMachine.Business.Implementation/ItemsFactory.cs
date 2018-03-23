@@ -6,29 +6,29 @@ using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Business.Implementation
 {
-    public class VendingMachineItemsFactory
+    public class ItemsFactory
     {
-        public class VendingMachineItemsFactoryProduction : IEnumerable<IVendingMachineItem>
+        public class VendingMachineItemsFactoryProduction : IEnumerable<IItem>
         {
-            private IList<IVendingMachineItem> items = new List<IVendingMachineItem>();
+            private IList<IItem> items = new List<IItem>();
 
-            public VendingMachineItemsFactoryProduction(IVendingMachineProduct initialProduct, uint quantity)
+            public VendingMachineItemsFactoryProduction(IProduct initialProduct, uint quantity)
             {
                 Then(initialProduct, quantity);
             }
 
-            public VendingMachineItemsFactoryProduction Then(IVendingMachineProduct product, uint quantity)
+            public VendingMachineItemsFactoryProduction Then(IProduct product, uint quantity)
             {
                 for (int i = 1; i <= quantity; i++)
                 {
-                    var newItem = new VendingMachineItem(product);
+                    var newItem = new Item(product);
                     items.Add(newItem);
                 }
 
                 return this;
             }
 
-            public IEnumerator<IVendingMachineItem> GetEnumerator()
+            public IEnumerator<IItem> GetEnumerator()
             {
                 return items.GetEnumerator();
             }
@@ -39,7 +39,7 @@ namespace VendingMachine.Business.Implementation
             }
         }
 
-        public static VendingMachineItemsFactoryProduction Make(IVendingMachineProduct product, uint quantity)
+        public static VendingMachineItemsFactoryProduction Make(IProduct product, uint quantity)
         {
             return new VendingMachineItemsFactoryProduction(product, quantity);
         }

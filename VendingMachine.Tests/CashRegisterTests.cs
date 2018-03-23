@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VendingMachine.Data;
 using VendingMachine.Business.Implementation;
+using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Tests
 {
@@ -13,9 +14,9 @@ namespace VendingMachine.Tests
         {
             var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 20);
 
-            var fiftyFrancsInFiveFrancsCoins = CoinsFactory.Get(CoinsTypesRepository.FiveSwissFrancs, 10);
-            var thirtyFrancsInTwoFrancsCoins = CoinsFactory.Get(CoinsTypesRepository.TwoSwissFrancs, 15);
-            var tenFrancsInOneFrancCoins = CoinsFactory.Get(CoinsTypesRepository.OneSwissFranc, 10);
+            var fiftyFrancsInFiveFrancsCoins = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs, 10);
+            var thirtyFrancsInTwoFrancsCoins = CoinsFactory.Make(CoinsTypesRepository.TwoSwissFrancs, 15);
+            var tenFrancsInOneFrancCoins = CoinsFactory.Make(CoinsTypesRepository.OneSwissFranc, 10);
 
             var allCoins = fiftyFrancsInFiveFrancsCoins.Concat(thirtyFrancsInTwoFrancsCoins).Concat(tenFrancsInOneFrancCoins);
 
@@ -30,9 +31,9 @@ namespace VendingMachine.Tests
         {
             var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 20);
 
-            var fiftyFrancsInFiveFrancsCoins = CoinsFactory.Get(CoinsTypesRepository.FiveSwissFrancs, 10);
-            var thirtyFrancsInTwoFrancsCoins = CoinsFactory.Get(CoinsTypesRepository.TwoSwissFrancs, 15);
-            var tenFrancsInOneFrancCoins = CoinsFactory.Get(CoinsTypesRepository.OneSwissFranc, 10);
+            var fiftyFrancsInFiveFrancsCoins = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs, 10);
+            var thirtyFrancsInTwoFrancsCoins = CoinsFactory.Make(CoinsTypesRepository.TwoSwissFrancs, 15);
+            var tenFrancsInOneFrancCoins = CoinsFactory.Make(CoinsTypesRepository.OneSwissFranc, 10);
 
             var allCoins = fiftyFrancsInFiveFrancsCoins.Concat(thirtyFrancsInTwoFrancsCoins).Concat(tenFrancsInOneFrancCoins);
 
@@ -92,7 +93,7 @@ namespace VendingMachine.Tests
             var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 20);
 
             // Get 10 coins of each type
-            var allCoins = CoinsTypesRepository.SwissFrancCoins.SelectMany(coinType => CoinsFactory.Get(coinType, 10));
+            var allCoins = CoinsTypesRepository.SwissFrancCoins.SelectMany(coinType => CoinsFactory.Make(coinType, 10));
             cashRegister.TryPut(allCoins);
 
             IEnumerable<ICoin> coins;

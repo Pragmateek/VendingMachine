@@ -2,13 +2,13 @@
 
 namespace VendingMachine.Business.Implementation
 {
-    public class VendingMachineCatalogEntry : IVendingMachineCatalogEntry
+    public class CatalogEntry : ICatalogEntry
     {
-        public IVendingMachineProduct Product { get; private set; }
+        public IProduct Product { get; private set; }
 
         public IPrice Price { get; private set; }
 
-        public VendingMachineCatalogEntry(IVendingMachineProduct product, IPrice price)
+        public CatalogEntry(IProduct product, IPrice price)
         {
             Product = product;
             Price = price;

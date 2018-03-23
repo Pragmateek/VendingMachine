@@ -42,12 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\VendingMachineStoreSlotViewModel.cs" />
-    <Compile Include="ViewModels\VendingMachineStoreViewModel.cs" />
-    <Compile Include="Views\VendingMachineStoreView.cs">
+    <Compile Include="ViewModels\ProductsChoicesViewModel.cs" />
+    <Compile Include="ViewModels\ProductChoiceViewModel.cs" />
+    <Compile Include="ViewModels\ControlPanelViewModel.cs" />
+    <Compile Include="ViewModels\StoreSlotViewModel.cs" />
+    <Compile Include="ViewModels\StoreViewModel.cs" />
+    <Compile Include="Views\ProductsChoicesView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\VendingMachineStoreSlotView.cs">
+    <Compile Include="Views\ProductChoiceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ControlPanelView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StoreView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StoreSlotView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\CashRegisterSlotView.cs">
@@ -93,9 +105,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VendingMachine.Business\VendingMachine.Business.Contracts.csproj">
+    <ProjectReference Include="..\VendingMachine.Business.Contracts\VendingMachine.Business.Contracts.csproj">
       <Project>{bf56c62f-97a7-495a-8ff8-956dd05e9272}</Project>
       <Name>VendingMachine.Business.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VendingMachine.Business.Implementation\VendingMachine.Business.Implementation.csproj">
+      <Project>{84601ca9-cb96-4d7b-9981-980a755057eb}</Project>
+      <Name>VendingMachine.Business.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

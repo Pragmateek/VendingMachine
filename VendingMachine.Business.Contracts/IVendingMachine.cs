@@ -9,12 +9,10 @@ namespace VendingMachine.Business.Contracts
     {
         uint Capacity { get; }
 
-        IVendingMachineStore Store { get; }
+        IStore Store { get; }
         ICashRegister CashRegister { get; }
-        IVendingMachineControlPanel ControlPanel { get; }
-
-        ICurrency Currency { get; }
+        IControlPanel ControlPanel { get; }
         
-        bool TryBuyItem(IVendingMachineProduct product);
+        bool TryBuyItem(IProduct product);
     }
 }

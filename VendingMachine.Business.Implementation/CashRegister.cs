@@ -68,7 +68,7 @@ namespace VendingMachine.Business.Implementation
                     // The amount is a multiple of current slot coins value.
                     haveFoundASolution = true;
 
-                    coins = CoinsFactory.Get(biggestInferiorSlot.CoinType, n);
+                    coins = CoinsFactory.Make(biggestInferiorSlot.CoinType, n);
 
                     break;
                 }
@@ -85,7 +85,7 @@ namespace VendingMachine.Business.Implementation
                 // We have found a solution for the remainder, hence for the whole amount
                 haveFoundASolution = true;
 
-                var currentSlotCoins = CoinsFactory.Get(biggestInferiorSlot.CoinType, n);
+                var currentSlotCoins = CoinsFactory.Make(biggestInferiorSlot.CoinType, n);
 
                 coins = remainderCoins.Concat(currentSlotCoins);
 

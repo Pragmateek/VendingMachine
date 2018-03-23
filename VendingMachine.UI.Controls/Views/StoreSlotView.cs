@@ -10,8 +10,8 @@ namespace VendingMachine.UI.Controls
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private VendingMachineStoreSlotViewModel model;
-        public VendingMachineStoreSlotViewModel Model
+        private StoreSlotViewModel model;
+        public StoreSlotViewModel Model
         {
             get { return model; }
             set
@@ -131,7 +131,7 @@ namespace VendingMachine.UI.Controls
             ((PictureBox)sender).Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
         }
 
-        public VendingMachineStoreSlotView(VendingMachineStoreSlotViewModel model) : this()
+        public VendingMachineStoreSlotView(StoreSlotViewModel model) : this()
         {
             Model = model;
         }

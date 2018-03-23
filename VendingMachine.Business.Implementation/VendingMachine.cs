@@ -8,25 +8,27 @@ namespace VendingMachine.Business.Implementation
     {
         public uint Capacity { get; private set; }
 
-        protected readonly IVendingMachineStore store;
+        protected readonly IStore store;
         protected readonly ICashRegister cashRegister;
-        protected readonly IVendingMachineControlPanel controlPanel;
+        protected readonly IControlPanel controlPanel;
 
-        public IVendingMachineStore Store => store;
+        public IStore Store => store;
         public ICashRegister CashRegister => cashRegister;
-        public IVendingMachineControlPanel ControlPanel => controlPanel;
+        public IControlPanel ControlPanel => controlPanel;
 
         public ICurrency Currency { get; private set; }
         public decimal InsertedAmount { get; private set; }
 
-        public VendingMachine(IVendingMachineCatalog catalog, uint capacity)
+        public VendingMachine(ICatalog catalog, uint storeSlotsCapacity, IEnumerable<ICoinType> acceptedCoinsTypes, uint cashRegisterCapacity)
         {
-            store = new VendingMachineStore(catalog, capacity);
+            store = new Store(catalog, storeSlotsCapacity);
+            cashRegister = new CashRegister(acceptedCoinsTypes, cashRegisterCapacity);
+            controlPanel = new ControlPanel(catalog, acceptedCoinsTypes);
         }
 
-        public IVendingMachine Feed(IEnumerable<IVendingMachineItem> items)
+        public IVendingMachine Feed(IEnumerable<IItem> items)
         {
-            store.Store(items);
+            store.Put(items);
 
             return this;
         }
@@ -41,7 +43,7 @@ namespace VendingMachine.Business.Implementation
             throw new NotImplementedException();
         }
 
-        public bool TryBuyItem(IVendingMachineProduct product)
+        public bool TryBuyItem(IProduct product)
         {
             throw new NotImplementedException();
         }
