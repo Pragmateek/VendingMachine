@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using VendingMachine.Business.Implementation;
 using VendingMachine.UI.Controls.ViewModels;
 
 namespace VendingMachine.UI.Controls
@@ -30,8 +29,7 @@ namespace VendingMachine.UI.Controls
                 TextAlign = ContentAlignment.MiddleCenter
             };
             buyProductButton.DataBindings.Add("Enabled", this, "Model.ProductChoice.IsPossible");
-
-            //((ProductChoice)Model.ProductChoice).PropertyChanged += ProductChoice_PropertyChanged;
+            buyProductButton.DataBindings.Add("Text", this, "Model.ProductChoice.CatalogEntry.Price");
 
             var layout = new TableLayoutPanel
             {
@@ -49,10 +47,6 @@ namespace VendingMachine.UI.Controls
 
             Controls.Add(layout);
         }
-
-        //private void ProductChoice_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //}
 
         private void productView_LoadCompleted(object sender, EventArgs e)
         {

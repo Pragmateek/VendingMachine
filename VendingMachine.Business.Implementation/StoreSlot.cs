@@ -58,5 +58,10 @@ namespace VendingMachine.Business.Implementation
         {
             return items.GetEnumerator();
         }
+
+        public override string ToString()
+        {
+            return $"{CatalogEntry.Product}: {Count} / {Capacity}";
+        }
     }
 }
