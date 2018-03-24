@@ -12,7 +12,10 @@ namespace VendingMachine.Business.Contracts
         IStore Store { get; }
         ICashRegister CashRegister { get; }
         IControlPanel ControlPanel { get; }
-        
+
+        void Feed(IEnumerable<IItem> items);
+        void Insert(ICoin coin);
+        void Insert(IEnumerable<ICoin> coins);
         bool TryBuyItem(IProduct product);
     }
 }

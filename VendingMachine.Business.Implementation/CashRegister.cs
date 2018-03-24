@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VendingMachine.Business.Contracts;
+using VendingMachine.Tools;
 
 namespace VendingMachine.Business.Implementation
 {
@@ -17,7 +18,7 @@ namespace VendingMachine.Business.Implementation
             slots = coinTypes.Select(coinType => new CashRegisterSlot(coinType, capacity)).ToArray();
         }
 
-        public bool TryPut(ICoin coin)
+        public void Put(ICoin coin)
         {
             var slot = Slots.FirstOrDefault(s => s.CoinType == coin.Type);
 
@@ -26,12 +27,15 @@ namespace VendingMachine.Business.Implementation
                 throw new Exception($"This cash register has no slot for '{coin.Type}'!");
             }
 
-            return slot.TryPut(coin);
+            slot.TryPut(coin);
         }
 
-        public bool TryPut(IEnumerable<ICoin> coins)
+        public void Put(IEnumerable<ICoin> coins)
         {
-            return coins.All(coin => TryPut(coin));
+            foreach (var coin in coins)
+            {
+                Put(coin);
+            }
         }
 
         private bool TryGetInternal(IEnumerable<ICashRegisterSlot> slots, decimal amount, out IEnumerable<ICoin> coins)
@@ -108,6 +112,18 @@ namespace VendingMachine.Business.Implementation
 
                 slot.Remove(coin);
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            var otherCashRegister = obj as CashRegister;
+
+            return otherCashRegister != null && otherCashRegister.Slots.SequenceEqual(Slots);
+        }
+
+        public override int GetHashCode()
+        {
+            return slots.GetElementsHashCode();
         }
     }
 }

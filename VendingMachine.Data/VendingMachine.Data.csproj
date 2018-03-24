@@ -65,12 +65,15 @@
   <ItemGroup>
     <Compile Include="Persistence\CashRegisterSlotState.cs" />
     <Compile Include="Persistence\ControlPanelState.cs" />
+    <Compile Include="Persistence\Mappings\StoreSlotStateMapping.cs" />
     <Compile Include="Persistence\Mappings\CashRegisterSlotStateMapping.cs" />
     <Compile Include="Persistence\Mappings\CashRegisterStateMapping.cs" />
     <Compile Include="Persistence\Mappings\ControlPanelStateMapping.cs" />
     <Compile Include="Persistence\Mappings\StoreStateMapping.cs" />
+    <Compile Include="Persistence\Mappings\_VendingMachineStateMapping.cs" />
     <Compile Include="Persistence\StoreSlotState.cs" />
     <Compile Include="Persistence\CashRegisterState.cs" />
+    <Compile Include="Persistence\_VendingMachineState.cs" />
     <Compile Include="Repositories\CoinsTypesRepository.cs" />
     <Compile Include="Repositories\CurrenciesRepository.cs" />
     <Compile Include="Repositories\PricesExtensions.cs" />

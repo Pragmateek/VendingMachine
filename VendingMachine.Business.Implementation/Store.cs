@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using VendingMachine.Business.Contracts;
+using VendingMachine.Tools;
 
 namespace VendingMachine.Business.Implementation
 {
     public class Store : IStore
     {
         private readonly IList<IStoreSlot> slots = new List<IStoreSlot>();
+        public IEnumerable<IStoreSlot> Slots => slots;
 
         public Store(ICatalog catalog, uint capacity)
         {
@@ -39,14 +40,26 @@ namespace VendingMachine.Business.Implementation
             itemProductSlot.Store(newItem);
         }
 
-        public IEnumerator<IStoreSlot> GetEnumerator()
+        //public IEnumerator<IStoreSlot> GetEnumerator()
+        //{
+        //    return slots.GetEnumerator();
+        //}
+
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return slots.GetEnumerator();
+        //}
+
+        public override bool Equals(object obj)
         {
-            return slots.GetEnumerator();
+            var otherStore = obj as Store;
+
+            return otherStore != null && otherStore.Slots.SequenceEqual(Slots);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public override int GetHashCode()
         {
-            return slots.GetEnumerator();
+            return slots.GetElementsHashCode();
         }
     }
 }

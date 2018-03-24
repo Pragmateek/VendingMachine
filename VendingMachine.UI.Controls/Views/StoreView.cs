@@ -37,7 +37,7 @@ namespace VendingMachine.UI.Controls
             slotsViewsLayout.ColumnCount = 0;
             slotsViewsLayout.ColumnStyles.Clear();
 
-            foreach (var slot in Model.Store)
+            foreach (var slot in Model.Store.Slots)
             {
                 slotsViewsLayout.ColumnCount += 1;
 

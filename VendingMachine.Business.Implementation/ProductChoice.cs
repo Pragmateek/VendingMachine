@@ -29,5 +29,14 @@ namespace VendingMachine.Business.Implementation
         {
             this.catalogEntry = catalogEntry;
         }
+
+        public override bool Equals(object obj)
+        {
+            var otherProductChoice = obj as ProductChoice;
+
+            return otherProductChoice != null &&
+                Equals(otherProductChoice.CatalogEntry, CatalogEntry) &&
+                otherProductChoice.IsPossible == IsPossible;
+        }
     }
 }

@@ -30,26 +30,44 @@ namespace VendingMachine.Business.Implementation
             controlPanel = new ControlPanel(catalog, acceptedCoinsTypes, cashRegister);
         }
 
-        public IVendingMachine Feed(IEnumerable<IItem> items)
+        public void Feed(IEnumerable<IItem> items)
         {
             store.Put(items);
-
-            return this;
         }
 
-        public IVendingMachine Insert(ICoin coin)
+        public void Insert(ICoin coin)
         {
-            throw new NotImplementedException();
+            cashRegister.Put(coin);
+        }
+
+        public void Insert(IEnumerable<ICoin> coins)
+        {
+            cashRegister.Put(coins);
         }
 
         public IEnumerable<ICoin> Refund()
         {
-            throw new NotImplementedException();
+            IEnumerable<ICoin> coins;
+
+            cashRegister.TryGetChange(InsertedAmount, out coins);
+
+            return coins;
         }
 
         public bool TryBuyItem(IProduct product)
         {
             throw new NotImplementedException();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var otherVendingMachine = obj as VendingMachine;
+
+            return otherVendingMachine != null &&
+                Equals(otherVendingMachine.Catalog, Catalog) &&
+                Equals(otherVendingMachine.Store, Store) &&
+                Equals(otherVendingMachine.CashRegister, CashRegister) &&
+                Equals(otherVendingMachine.ControlPanel, ControlPanel);
         }
     }
 }

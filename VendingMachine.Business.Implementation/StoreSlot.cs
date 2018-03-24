@@ -59,6 +59,21 @@ namespace VendingMachine.Business.Implementation
             return items.GetEnumerator();
         }
 
+        public override bool Equals(object obj)
+        {
+            var otherStoreSlot = obj as StoreSlot;
+
+            return otherStoreSlot != null &&
+                Equals(otherStoreSlot.CatalogEntry, CatalogEntry) &&
+                otherStoreSlot.Capacity == Capacity &&
+                otherStoreSlot.Count == Count;
+        }
+
+        public override int GetHashCode()
+        {
+            return CatalogEntry.GetHashCode() ^ Capacity.GetHashCode() ^ Count.GetHashCode();
+        }
+
         public override string ToString()
         {
             return $"{CatalogEntry.Product}: {Count} / {Capacity}";

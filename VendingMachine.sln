@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.UI.Controls"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.UI.Client", "VendingMachine.UI.Client\VendingMachine.UI.Client.csproj", "{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Tools", "VendingMachine.Tools\VendingMachine.Tools.csproj", "{35C1C840-8732-4F80-A4D2-50ACC6631D2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F533E59-FB47-48E4-BD0B-92D12FBD57BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35C1C840-8732-4F80-A4D2-50ACC6631D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C1C840-8732-4F80-A4D2-50ACC6631D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C1C840-8732-4F80-A4D2-50ACC6631D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C1C840-8732-4F80-A4D2-50ACC6631D2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

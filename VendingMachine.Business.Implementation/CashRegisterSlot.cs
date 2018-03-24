@@ -56,5 +56,20 @@ namespace VendingMachine.Business.Implementation
         {
             Count--;
         }
+
+        public override bool Equals(object obj)
+        {
+            var otherCashRegisterSlot = obj as CashRegisterSlot;
+
+            return otherCashRegisterSlot != null &&
+                otherCashRegisterSlot.CoinType == CoinType &&
+                otherCashRegisterSlot.Capacity == Capacity &&
+                otherCashRegisterSlot.Count == Count;
+        }
+
+        public override int GetHashCode()
+        {
+            return CoinType.GetHashCode() ^ Capacity.GetHashCode() ^ Count.GetHashCode();
+        }
     }
 }

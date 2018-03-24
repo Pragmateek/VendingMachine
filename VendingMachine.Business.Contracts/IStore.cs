@@ -2,8 +2,10 @@
 
 namespace VendingMachine.Business.Contracts
 {
-    public interface IStore : IEnumerable<IStoreSlot>
+    public interface IStore
     {
+        IEnumerable<IStoreSlot> Slots { get; }
+
         void Put(IEnumerable<IItem> newItems);
     }
 }

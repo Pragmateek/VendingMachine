@@ -7,7 +7,8 @@ namespace VendingMachine.Business.Contracts
         IEnumerable<ICashRegisterSlot> Slots { get; }
         decimal Amount { get; }
 
-        bool TryPut(ICoin coin);
+        void Put(ICoin coin);
+        void Put(IEnumerable<ICoin> coins);
 
         bool TryGetChange(decimal amount, out IEnumerable<ICoin> cash);
 

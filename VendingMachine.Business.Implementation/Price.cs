@@ -13,6 +13,18 @@ namespace VendingMachine.Business.Implementation
             Amount = amount;
         }
 
+        public override bool Equals(object obj)
+        {
+            var otherPrice = obj as Price;
+
+            return otherPrice != null && otherPrice.Currency == Currency && otherPrice.Amount == Amount;
+        }
+
+        public override int GetHashCode()
+        {
+            return Currency.GetHashCode() ^ Amount.GetHashCode();
+        }
+
         public override string ToString()
         {
             return $"{Currency} {Amount}";

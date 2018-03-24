@@ -1,7 +1,9 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Criterion;
 using NHibernate.Mapping.ByCode;
 using System;
+using System.Collections.Generic;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 
@@ -19,6 +21,7 @@ namespace VendingMachine.Data
             var modelMapper = new ModelMapper();
             modelMapper.AddMapping<VendingMachineStateMapping>();
             modelMapper.AddMapping<StoreStateMapping>();
+            modelMapper.AddMapping<StoreSlotStateMapping>();
             modelMapper.AddMapping<CashRegisterStateMapping>();
             modelMapper.AddMapping<CashRegisterSlotStateMapping>();
             modelMapper.AddMapping<ControlPanelStateMapping>();
@@ -52,7 +55,7 @@ namespace VendingMachine.Data
 
             using (var session = sessionFactory.OpenSession())
             {
-                vendingMachineState = session.Get<VendingMachineState>(vendingMachineStateId);
+                vendingMachineState = session.CreateCriteria<VendingMachineState>().SetFetchMode("StoreState", FetchMode.Join).Add(Restrictions.IdEq(vendingMachineStateId)).UniqueResult<VendingMachineState>();
             }
 
             return vendingMachineState;

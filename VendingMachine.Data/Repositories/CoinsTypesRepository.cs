@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 
@@ -15,5 +16,12 @@ namespace VendingMachine.Data
         public static readonly ICoinType FiveSwissFrancCents = new CoinType("5 Swiss Franc Cents", CurrenciesRepository.CHF, 0.05m);
 
         public static readonly IEnumerable<ICoinType> SwissFrancCoins = new[] { FiveSwissFrancs, TwoSwissFrancs, OneSwissFranc, FiftySwissFrancCents, TwentySwissFrancCents, TenSwissFrancCents, FiveSwissFrancCents };
+
+        public static readonly IEnumerable<ICoinType> AllCoinTypes = SwissFrancCoins;
+
+        public static ICoinType GetCoinTypeByName(string coinTypeName)
+        {
+            return AllCoinTypes.FirstOrDefault(coinType => coinType.Name == coinTypeName);
+        }
     }
 }

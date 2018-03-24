@@ -20,7 +20,7 @@ namespace VendingMachine.Tests
 
             var allCoins = fiftyFrancsInFiveFrancsCoins.Concat(thirtyFrancsInTwoFrancsCoins).Concat(tenFrancsInOneFrancCoins);
 
-            cashRegister.TryPut(allCoins);
+            cashRegister.Put(allCoins);
 
             return cashRegister;
         }
@@ -37,9 +37,10 @@ namespace VendingMachine.Tests
 
             var allCoins = fiftyFrancsInFiveFrancsCoins.Concat(thirtyFrancsInTwoFrancsCoins).Concat(tenFrancsInOneFrancCoins);
 
-            var canPutMoney = cashRegister.TryPut(allCoins);
+            cashRegister.Put(allCoins);
+            //var canPutMoney = cashRegister.Put(allCoins);
 
-            Assert.IsTrue(canPutMoney);
+            //Assert.IsTrue(canPutMoney);
             Assert.AreEqual(90, cashRegister.Amount);
         }
 
@@ -94,7 +95,7 @@ namespace VendingMachine.Tests
 
             // Get 10 coins of each type
             var allCoins = CoinsTypesRepository.SwissFrancCoins.SelectMany(coinType => CoinsFactory.Make(coinType, 10));
-            cashRegister.TryPut(allCoins);
+            cashRegister.Put(allCoins);
 
             IEnumerable<ICoin> coins;
             // Should take 1 coin of each type

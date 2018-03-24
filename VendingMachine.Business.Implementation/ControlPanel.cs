@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,8 +9,6 @@ namespace VendingMachine.Business.Implementation
     public class ControlPanel : IControlPanel, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        //private readonly IVendingMachine controlledVendingMachine;
 
         private readonly IEnumerable<ICoinType> acceptedCoinsTypes;
         public IEnumerable<ICoinType> AcceptedCoinsTypes => acceptedCoinsTypes;
@@ -50,7 +47,7 @@ namespace VendingMachine.Business.Implementation
 
             insertedCoins.Add(coin);
 
-            cashRegister.TryPut(coin);
+            cashRegister.Put(coin);
 
             UpdateChoicesStates();
 
@@ -74,6 +71,21 @@ namespace VendingMachine.Business.Implementation
         public bool TryBuy(IProduct product)
         {
             throw new NotImplementedException();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var otherControlPanel = obj as ControlPanel;
+
+            return otherControlPanel != null &&
+                otherControlPanel.AcceptedCoinsTypes.SequenceEqual(AcceptedCoinsTypes) &&
+                otherControlPanel.InsertedCoins.SequenceEqual(InsertedCoins) &&
+                otherControlPanel.ProductsChoices.SequenceEqual(ProductsChoices);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
