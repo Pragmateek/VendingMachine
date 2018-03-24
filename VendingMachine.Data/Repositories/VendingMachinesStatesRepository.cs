@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Mapping.ByCode;
 using System;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
@@ -14,6 +15,14 @@ namespace VendingMachine.Data
         {
             var configuration = new Configuration();
             configuration.Configure();
+
+            var modelMapper = new ModelMapper();
+            modelMapper.AddMapping<VendingMachineStateMapping>();
+            modelMapper.AddMapping<StoreStateMapping>();
+            modelMapper.AddMapping<CashRegisterStateMapping>();
+            modelMapper.AddMapping<CashRegisterSlotStateMapping>();
+            modelMapper.AddMapping<ControlPanelStateMapping>();
+            configuration.AddDeserializedMapping(modelMapper.CompileMappingForAllExplicitlyAddedEntities(), "VendingMachineModelMapping");
 
             sessionFactory = configuration.BuildSessionFactory();
         }

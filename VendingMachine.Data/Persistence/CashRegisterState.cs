@@ -5,6 +5,7 @@ namespace VendingMachine.Data
 {
     public class CashRegisterState
     {
+        public virtual int Id { get; set; }
         public virtual CashRegisterSlotState[] SlotsStates { get; set; }
 
         public CashRegisterState()

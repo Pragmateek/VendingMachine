@@ -9,6 +9,7 @@ namespace VendingMachine.Data
 {
     public class StoreState
     {
+        public virtual int Id { get; set; }
         public virtual StoreSlotState[] SlotsStates { get; set; }
 
         public StoreState()

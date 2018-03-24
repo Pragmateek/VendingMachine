@@ -25,13 +25,13 @@ namespace VendingMachine.Data
         {
             Name = name;
             AcceptedCoinsTypesNames = string.Join(",", vendingMachine.AcceptedCoinsTypes);
-            CatalogState = string.Join(",", vendingMachine.Catalog.Select(entry => $"{entry.Product}:${entry.Price.Currency} ${entry.Price.Amount.ToString(CultureInfo.InvariantCulture)}"));
+            CatalogState = string.Join(",", vendingMachine.Catalog.Select(entry => $"{entry.Product}:{entry.Price.Currency}{entry.Price.Amount.ToString(CultureInfo.InvariantCulture)}"));
             StoreState = new StoreState(vendingMachine.Store);
             CashRegisterState = new CashRegisterState(vendingMachine.CashRegister);
             ControlPanelState = new ControlPanelState(vendingMachine.ControlPanel);
         }
 
-        public IVendingMachine AsVendingMachine()
+        public virtual IVendingMachine AsVendingMachine()
         {
             var catalog = new Catalog();
             var catalogEntriesStates = CatalogState.Split(',');

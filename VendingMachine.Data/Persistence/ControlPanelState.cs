@@ -6,7 +6,7 @@ namespace VendingMachine.Data
     public class ControlPanelState
     {
         public virtual int Id { get; set; }
-        public string InsertedCoinsTypesNames { get; }
+        public virtual string InsertedCoinsTypesNames { get; set; }
 
         public ControlPanelState()
         {

@@ -9,9 +9,9 @@ namespace VendingMachine.Data
         {
             Id(vms => vms.Id, m => m.Generator(Generators.Identity));
             Property(vms => vms.AcceptedCoinsTypesNames);
-            Property(vms => vms.StoreState);
-            Property(vms => vms.CashRegisterState);
-            Property(vms => vms.ControlPanelState);
+            OneToOne(vms => vms.StoreState, m => { });
+            OneToOne(vms => vms.CashRegisterState, m => { });
+            OneToOne(vms => vms.ControlPanelState, m => { });
         }
     }
 }
