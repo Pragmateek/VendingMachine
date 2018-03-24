@@ -8,7 +8,7 @@ namespace VendingMachine.Data
         public StoreStateMapping()
         {
             Id(ss => ss.Id, m => m.Generator(Generators.Identity));
-            Property(ss => ss.SlotsStates);
+            //ManyToOne(ss => ss.SlotsStates);
         }
     }
 }
