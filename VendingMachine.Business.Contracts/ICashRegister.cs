@@ -10,5 +10,7 @@ namespace VendingMachine.Business.Contracts
         bool TryPut(ICoin coin);
 
         bool TryGetChange(decimal amount, out IEnumerable<ICoin> cash);
+
+        void Remove(IEnumerable<ICoin> coins);
     }
 }

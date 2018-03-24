@@ -12,5 +12,7 @@
         decimal Amount { get; }
 
         bool TryPut(ICoin coin);
+
+        void Remove(ICoin coin);
     }
 }

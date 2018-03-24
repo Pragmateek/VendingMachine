@@ -28,10 +28,16 @@ namespace VendingMachine.UI.Controls
             coinsInput = new ComboBox
             {
                 DataSource = Model.ControlPanel.AcceptedCoinsTypes,
-                SelectedItem = null,
                 Dock = DockStyle.Fill
             };
             coinsInput.SelectionChangeCommitted += CoinsInput_SelectionChangeCommitted;
+
+            var refundInput = new Button
+            {
+                Dock = DockStyle.Fill
+            };
+            refundInput.DataBindings.Add("Enabled", this, "Model.CanRefund");
+            refundInput.Click += RefundInput_Click;
 
             var productsChoicesViewModel = new ProductsChoicesViewModel(Model.ControlPanel.ProductsChoices);
             var productsChoicesView = new ProductsChoicesView(productsChoicesViewModel)
@@ -47,13 +53,20 @@ namespace VendingMachine.UI.Controls
             };
             layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
             layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 80));
 
             layout.Controls.Add(insertedAmountView, 0, 0);
             layout.Controls.Add(coinsInput, 0, 1);
-            layout.Controls.Add(productsChoicesView, 0, 2);
+            layout.Controls.Add(refundInput, 0, 2);
+            layout.Controls.Add(productsChoicesView, 0, 3);
 
             Controls.Add(layout);
+        }
+
+        private void RefundInput_Click(object sender, System.EventArgs e)
+        {
+            Model.ControlPanel.Refund();
         }
 
         private void CoinsInput_SelectionChangeCommitted(object sender, System.EventArgs e)

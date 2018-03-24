@@ -16,10 +16,23 @@ namespace VendingMachine.UI.Controls.ViewModels
                 if (value != cashRegisterSlot)
                 {
                     cashRegisterSlot = value;
+
+                    if (cashRegisterSlot is INotifyPropertyChanged)
+                    {
+                        ((INotifyPropertyChanged)cashRegisterSlot).PropertyChanged += CashRegisterSlot_PropertyChanged;
+                    }
+
                     PropertyChanged(this, new PropertyChangedEventArgs(nameof(CashRegisterSlot)));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(CountCapacityText)));
                     PropertyChanged(this, new PropertyChangedEventArgs(nameof(CashRegisterSlotCoinImagePath)));
                 }
             }
+        }
+
+        private void CashRegisterSlot_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(CountCapacityText)));
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(CashRegisterSlotCoinImagePath)));
         }
 
         public string CashRegisterSlotCoinImagePath => $"./Images/Coins/{CashRegisterSlot.CoinType.Name.Replace(" ", "")}.png";
@@ -28,7 +41,7 @@ namespace VendingMachine.UI.Controls.ViewModels
 
         public CashRegisterSlotViewModel(ICashRegisterSlot cashRegisterSlot)
         {
-            this.cashRegisterSlot = cashRegisterSlot;
+            CashRegisterSlot = cashRegisterSlot;
         }
     }
 }

@@ -35,9 +35,8 @@ namespace VendingMachine.UI.Controls
             var countCapacityLabel = new Label
             {
                 Font = new Font(Label.DefaultFont, FontStyle.Bold),
-                Dock = DockStyle.Bottom,
-                TextAlign = ContentAlignment.MiddleCenter,
-                BorderStyle = BorderStyle.FixedSingle
+                Dock = DockStyle.Right,
+                TextAlign = ContentAlignment.MiddleCenter
             };
             countCapacityLabel.DataBindings.Add("Text", this, "Model.CountCapacityText");
 

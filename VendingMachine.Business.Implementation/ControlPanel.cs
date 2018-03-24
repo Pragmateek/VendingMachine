@@ -22,10 +22,13 @@ namespace VendingMachine.Business.Implementation
         private readonly IEnumerable<ProductChoice> productsChoices;
         public IEnumerable<IProductChoice> ProductsChoices => productsChoices;
 
-        public ControlPanel(ICatalog productsCatalog, IEnumerable<ICoinType> acceptedCoinsTypes/*IVendingMachine controlledVendingMachine*/)
+        private readonly ICashRegister cashRegister;
+
+        public ControlPanel(ICatalog productsCatalog, IEnumerable<ICoinType> acceptedCoinsTypes, ICashRegister cashRegister/*IVendingMachine controlledVendingMachine*/)
         {
             this.productsChoices = productsCatalog.Select(catalogEntry => new ProductChoice(catalogEntry)).ToArray();
             this.acceptedCoinsTypes = acceptedCoinsTypes;
+            this.cashRegister = cashRegister;
         }
 
         private void UpdateChoicesStates()
@@ -47,6 +50,8 @@ namespace VendingMachine.Business.Implementation
 
             insertedCoins.Add(coin);
 
+            cashRegister.TryPut(coin);
+
             UpdateChoicesStates();
 
             PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedCoins)));
@@ -56,7 +61,12 @@ namespace VendingMachine.Business.Implementation
         {
             var insertedCoins = this.insertedCoins.ToArray();
 
+            cashRegister.Remove(insertedCoins);
+
             this.insertedCoins.Clear();
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedCoins)));
+
+            UpdateChoicesStates();
 
             return insertedCoins;
         }

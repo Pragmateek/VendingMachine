@@ -1,14 +1,29 @@
 ﻿using System;
+using System.ComponentModel;
 using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Business.Implementation
 {
-    public class CashRegisterSlot : ICashRegisterSlot
+    public class CashRegisterSlot : ICashRegisterSlot, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
         public ICoinType CoinType { get; }
 
         public uint Capacity { get; }
-        public uint Count { get; private set; }
+        private uint count;
+        public uint Count
+        {
+            get { return count; }
+            set
+            {
+                if (value != count)
+                {
+                    count = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Count)));
+                }
+            }
+        }
 
         public bool IsFull => Count == Capacity;
 
@@ -35,6 +50,11 @@ namespace VendingMachine.Business.Implementation
             Count++;
 
             return true;
+        }
+
+        public void Remove(ICoin coin)
+        {
+            Count--;
         }
     }
 }

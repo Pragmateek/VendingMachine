@@ -29,21 +29,30 @@ namespace VendingMachine.UI.Controls
 
         public CashRegisterView(CashRegisterViewModel model)
         {
+            var numberOfCoinsTypes = model.CashRegister.Slots.Count();
+
             var layout = new TableLayoutPanel
             {
                 AutoScroll = true,
-                RowCount = 1,
-                ColumnCount = model.CashRegister.Slots.Count(),
+                ColumnCount = 1,
+                RowCount = numberOfCoinsTypes,
                 Dock = DockStyle.Fill
             };
 
-            int column = 0;
+            var rowHeight = 100f / numberOfCoinsTypes;
+
+            int row = 0;
             foreach (var cashRegisterSlot in model.CashRegister.Slots)
             {
+                layout.RowStyles.Add(new RowStyle(SizeType.Percent, rowHeight));
+
                 var cashRegisterSlotViewModel = new CashRegisterSlotViewModel(cashRegisterSlot);
-                var cashRegisterSlotView = new CashRegisterSlotView(cashRegisterSlotViewModel);
-                layout.Controls.Add(cashRegisterSlotView, column, 0);
-                column += 1;
+                var cashRegisterSlotView = new CashRegisterSlotView(cashRegisterSlotViewModel)
+                {
+                    Dock = DockStyle.Fill
+                };
+                layout.Controls.Add(cashRegisterSlotView, 0, row);
+                row += 1;
             }
 
             Controls.Add(layout);

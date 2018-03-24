@@ -6,8 +6,6 @@ namespace VendingMachine.Business.Implementation
 {
     public class VendingMachine : IVendingMachine
     {
-        public uint Capacity { get; private set; }
-
         protected readonly IStore store;
         protected readonly ICashRegister cashRegister;
         protected readonly IControlPanel controlPanel;
@@ -23,7 +21,7 @@ namespace VendingMachine.Business.Implementation
         {
             store = new Store(catalog, storeSlotsCapacity);
             cashRegister = new CashRegister(acceptedCoinsTypes, cashRegisterCapacity);
-            controlPanel = new ControlPanel(catalog, acceptedCoinsTypes);
+            controlPanel = new ControlPanel(catalog, acceptedCoinsTypes, cashRegister);
         }
 
         public IVendingMachine Feed(IEnumerable<IItem> items)

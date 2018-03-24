@@ -7,8 +7,6 @@ namespace VendingMachine.Business.Contracts
     /// </summary>
     public interface IVendingMachine
     {
-        uint Capacity { get; }
-
         IStore Store { get; }
         ICashRegister CashRegister { get; }
         IControlPanel ControlPanel { get; }

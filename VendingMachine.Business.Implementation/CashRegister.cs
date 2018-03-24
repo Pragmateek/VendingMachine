@@ -99,5 +99,15 @@ namespace VendingMachine.Business.Implementation
         {
             return TryGetInternal(Slots, amount, out coins);
         }
+
+        public void Remove(IEnumerable<ICoin> coins)
+        {
+            foreach (var coin in coins)
+            {
+                var slot = Slots.FirstOrDefault(s => s.CoinType == coin.Type);
+
+                slot.Remove(coin);
+            }
+        }
     }
 }

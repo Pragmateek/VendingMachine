@@ -26,19 +26,22 @@ namespace VendingMachine.UI.Controls.ViewModels
             }
         }
 
+        public string InsertedAmountText => $"{ControlPanel.AcceptedCoinsTypes.First().Currency} {ControlPanel.InsertedCoins.Sum(coin => coin.Type.FaceValue)}";
+
+        public bool CanRefund => ControlPanel.InsertedCoins.Any();
+
+        public ControlPanelViewModel(IControlPanel controlPanel)
+        {
+            ControlPanel = controlPanel;
+        }
+
         private void ControlPanel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IControlPanel.InsertedCoins))
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedAmountText)));
+                PropertyChanged(this, new PropertyChangedEventArgs(nameof(CanRefund)));
             }
-        }
-
-        public string InsertedAmountText => $"{ControlPanel.AcceptedCoinsTypes.First().Currency} {ControlPanel.InsertedCoins.Sum(coin => coin.Type.FaceValue)}";
-
-        public ControlPanelViewModel(IControlPanel controlPanel)
-        {
-            ControlPanel = controlPanel;
         }
     }
 }

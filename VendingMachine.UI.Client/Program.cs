@@ -104,10 +104,27 @@ namespace VendingMachine.UI.Client
             UI.ShowDialog();
         }
 
+        static void ShowVendingMachine()
+        {
+            var vendingMachine = new LombardOdierVendingMachine();
+
+            var vendingMachineViewModel = new VendingMachineViewModel(vendingMachine);
+            var vendingMachineView = new VendingMachineView(vendingMachineViewModel)
+            {
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var UI = new Form();
+            UI.Controls.Add(vendingMachineView);
+
+            UI.ShowDialog();
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
-            ShowVendingMachineControlPanel();
+            new MainWindow().ShowDialog();
         }
     }
 }

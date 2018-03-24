@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\VendingMachineViewModel.cs" />
     <Compile Include="ViewModels\ProductsChoicesViewModel.cs" />
     <Compile Include="ViewModels\ProductChoiceViewModel.cs" />
     <Compile Include="ViewModels\ControlPanelViewModel.cs" />
@@ -54,6 +55,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\ControlPanelView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\VendingMachineView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\StoreView.cs">
