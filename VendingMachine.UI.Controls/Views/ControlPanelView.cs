@@ -89,7 +89,7 @@ namespace VendingMachine.UI.Controls
             var selectedCoinType = (ICoinType)coinsInput.SelectedItem;
             var coin = CoinsFactory.Make(selectedCoinType);
 
-            Model.ControlPanel.Insert(coin);
+            Model.ControlPanel.TryInsert(coin);
 
             coinsInput.SelectedItem = null;
         }

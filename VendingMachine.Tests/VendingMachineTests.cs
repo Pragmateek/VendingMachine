@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
+using Implementation = VendingMachine.Business.Implementation;
 using VendingMachine.Data;
 
 namespace VendingMachine.Tests
@@ -9,6 +10,22 @@ namespace VendingMachine.Tests
     [TestClass]
     public class VendingMachineTests
     {
+        [TestMethod]
+        public void CanOnlyInsertAcceptedCoins()
+        {
+            var acceptedCoinsTypes = CoinsTypesRepository.SwissFrancCoins.Except(new[] { CoinsTypesRepository.TenSwissFrancCents, CoinsTypesRepository.FiveSwissFrancCents });
+            var vendingMachine = new Implementation.VendingMachine(Catalog.Empty, 0, acceptedCoinsTypes, 100);
+
+            // First check that we can insert accepted coins.
+            var fiveSwissFrancs = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs);
+            var canInsertAcceptedCoin = vendingMachine.TryInsert(fiveSwissFrancs);
+            Assert.IsTrue(canInsertAcceptedCoin);
+
+            var fiveSwissFrancCents = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancCents);
+            var canInsertNonAcceptedCoin = vendingMachine.TryInsert(fiveSwissFrancCents);
+            Assert.IsFalse(canInsertNonAcceptedCoin);
+        }
+
         [TestMethod]
         public void CannotBuyAnythingFromAnEmptyMachine()
         {
@@ -32,7 +49,7 @@ namespace VendingMachine.Tests
             var vendingMachine = new LombardOdierVendingMachine(10, 100);
 
             vendingMachine.Feed(ItemsFactory.Make(ProductsRepository.EvianBottle, 2));
-            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.OneSwissFranc));
+            vendingMachine.TryInsert(CoinsFactory.Make(CoinsTypesRepository.OneSwissFranc));
 
             IItem EvianBottle;
             var canBuySomethingWithoutEnoughMoney = vendingMachine.TryBuyItem(ProductsRepository.EvianBottle, out EvianBottle);
@@ -40,7 +57,7 @@ namespace VendingMachine.Tests
             Assert.IsFalse(canBuySomethingWithoutEnoughMoney);
             Assert.IsNull(EvianBottle);
 
-            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.TwentySwissFrancCents));
+            vendingMachine.TryInsert(CoinsFactory.Make(CoinsTypesRepository.TwentySwissFrancCents));
 
             var canBuySomethingWithEnoughMoney = vendingMachine.TryBuyItem(ProductsRepository.EvianBottle, out EvianBottle);
             Assert.IsTrue(canBuySomethingWithEnoughMoney);
@@ -63,7 +80,7 @@ namespace VendingMachine.Tests
 
             vendingMachine.Feed(new[] { firstEvianBottle, secondEvianBottle, thirdEvianBottle });
 
-            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs));
+            vendingMachine.TryInsert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs));
 
             IItem EvianBottle;
             var canGetSomeEvianBottle = vendingMachine.TryBuyItem(ProductsRepository.EvianBottle, out EvianBottle);
@@ -79,7 +96,7 @@ namespace VendingMachine.Tests
             var vendingMachine = new LombardOdierVendingMachine(10, 100);
 
             vendingMachine.Feed(ItemsFactory.Make(ProductsRepository.EvianBottle, 3));
-            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs));
+            vendingMachine.TryInsert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs));
 
             for (int i = 1; i <= 4; i++)
             {
@@ -110,7 +127,7 @@ namespace VendingMachine.Tests
             vendingMachine.Feed(ItemsFactory.Make(ProductsRepository.CocaColaBottle, 3));
             vendingMachine.Feed(ItemsFactory.Make(ProductsRepository.FantaBottle, 3));
 
-            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs));
+            vendingMachine.TryInsert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs));
 
             IItem EvianBottle;
             var canBuyAnEvianBottle = vendingMachine.TryBuyItem(ProductsRepository.EvianBottle, out EvianBottle);
@@ -138,7 +155,7 @@ namespace VendingMachine.Tests
             Assert.IsFalse(refundCoins.Any());
             Assert.AreEqual(0.90m, vendingMachine.InsertedAmount);
 
-            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.TenSwissFrancCents));
+            vendingMachine.TryInsert(CoinsFactory.Make(CoinsTypesRepository.TenSwissFrancCents));
 
             refundCoins = vendingMachine.Refund();
             Assert.IsTrue(refundCoins.Any());

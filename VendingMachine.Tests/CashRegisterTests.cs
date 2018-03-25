@@ -45,6 +45,44 @@ namespace VendingMachine.Tests
         }
 
         [TestMethod]
+        public void CannotPutMoreCoinsThanTheCashRegisterCapacity()
+        {
+            var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 10);
+
+            for (var i = 1; i <= 20; i++)
+            {
+                var fiveSwissFrancs = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs);
+
+                var coinHasBeenPut = cashRegister.TryPut(fiveSwissFrancs);
+
+                if (i <= 10)
+                {
+                    Assert.IsTrue(coinHasBeenPut);
+                    Assert.AreEqual(5m * i, cashRegister.Amount);
+                }
+                else
+                {
+                    Assert.IsFalse(coinHasBeenPut);
+                    Assert.AreEqual(50m, cashRegister.Amount);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void CannotPutTheSameCoinTwice()
+        {
+            var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 10);
+
+            var fiveSwissFrancs = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs);
+
+            var canPutOnce = cashRegister.TryPut(fiveSwissFrancs);
+            Assert.IsTrue(canPutOnce);
+
+            var canPutTwice = cashRegister.TryPut(fiveSwissFrancs);
+            Assert.IsFalse(canPutTwice);
+        }
+
+        [TestMethod]
         public void CannotGetAnythingFromAnEmptyCashRegister()
         {
             var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 10);

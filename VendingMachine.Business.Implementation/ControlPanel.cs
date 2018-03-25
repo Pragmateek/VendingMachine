@@ -53,28 +53,33 @@ namespace VendingMachine.Business.Implementation
             }
         }
 
-        public void Insert(ICoin coin)
+        public bool TryInsert(ICoin coin)
         {
             if (!AcceptedCoinsTypes.Any(coinType => coinType == coin.Type))
             {
-                throw new Exception($"'{coin}' is not accepted!");
+                //throw new Exception($"'{coin}' is not accepted!");
+                return false;
             }
 
-            //insertedCoins.Add(coin);
-            InsertedAmount += coin.Type.FaceValue;
+            if (!cashRegister.TryPut(coin))
+            {
+                return false;
+            }
 
-            cashRegister.Put(coin);
+            InsertedAmount += coin.Type.FaceValue;
 
             UpdateChoicesStates();
 
             NotifyMoneyChanged();
+
+            return true;
         }
 
         public void Insert(IEnumerable<ICoin> coins)
         {
             foreach (var coin in coins)
             {
-                Insert(coin);
+                TryInsert(coin);
             }
         }
 

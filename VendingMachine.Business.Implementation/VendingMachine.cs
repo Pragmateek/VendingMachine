@@ -35,9 +35,9 @@ namespace VendingMachine.Business.Implementation
             store.Put(items);
         }
 
-        public void Insert(ICoin coin)
+        public bool TryInsert(ICoin coin)
         {
-            controlPanel.Insert(coin);
+            return controlPanel.TryInsert(coin);
         }
 
         public void Insert(IEnumerable<ICoin> coins)

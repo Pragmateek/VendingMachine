@@ -18,7 +18,7 @@ namespace VendingMachine.Business.Implementation
             slots = coinTypes.Select(coinType => new CashRegisterSlot(coinType, capacity)).ToArray();
         }
 
-        public void Put(ICoin coin)
+        public bool TryPut(ICoin coin)
         {
             var slot = Slots.FirstOrDefault(s => s.CoinType == coin.Type);
 
@@ -27,14 +27,14 @@ namespace VendingMachine.Business.Implementation
                 throw new Exception($"This cash register has no slot for '{coin.Type}'!");
             }
 
-            slot.TryPut(coin);
+            return slot.TryPut(coin);
         }
 
         public void Put(IEnumerable<ICoin> coins)
         {
             foreach (var coin in coins)
             {
-                Put(coin);
+                TryPut(coin);
             }
         }
 

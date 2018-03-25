@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using VendingMachine.Business.Contracts;
 
@@ -9,6 +10,8 @@ namespace VendingMachine.Business.Implementation
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public ICoinType CoinType { get; }
+
+        private IList<ICoin> coins = new List<ICoin>();
 
         public uint Capacity { get; }
         private uint count;
@@ -39,7 +42,8 @@ namespace VendingMachine.Business.Implementation
         {
             if (coin.Type != CoinType)
             {
-                throw new Exception($"This slot does not handle '{coin.Type}'!");
+                // throw new Exception($"This slot does not handle '{coin.Type}'!");
+                return false;
             }
 
             if (IsFull)
@@ -47,6 +51,12 @@ namespace VendingMachine.Business.Implementation
                 return false;
             }
 
+            if (coins.Any(c => c == coin))
+            {
+                return false;
+            }
+
+            coins.Add(coin);
             Count++;
 
             return true;
@@ -54,7 +64,10 @@ namespace VendingMachine.Business.Implementation
 
         public void Remove(ICoin coin)
         {
-            Count--;
+            if (coins.Remove(coin))
+            {
+                Count--;
+            }
         }
 
         public override bool Equals(object obj)

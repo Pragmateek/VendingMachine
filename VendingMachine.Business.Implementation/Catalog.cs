@@ -6,8 +6,13 @@ using VendingMachine.Tools;
 
 namespace VendingMachine.Business.Implementation
 {
+    /// <summary>
+    /// Minimal implementation of <see cref="ICatalog"/>.
+    /// </summary>
     public class Catalog : ICatalog
     {
+        public static Catalog Empty = new Catalog();
+
         private IList<ICatalogEntry> entries = new List<ICatalogEntry>();
 
         public void ReferenceProduct(IProduct product, IPrice price)
