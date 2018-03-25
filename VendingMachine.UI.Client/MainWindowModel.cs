@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using log4net;
+using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Forms;
 using VendingMachine.Business.Contracts;
@@ -9,6 +11,8 @@ namespace VendingMachine.UI.Client
 {
     public class MainWindowModel : INotifyPropertyChanged
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(MainWindowModel));
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         private IVendingMachine currentVendingMachine;
@@ -57,6 +61,8 @@ namespace VendingMachine.UI.Client
 
         public void NewVendingMachine()
         {
+            logger.Info("Creating new vending machine.");
+
             var newVendingMachine = new LombardOdierVendingMachine(Configuration.StoreSlotsCapacity, Configuration.CashRegisterSlotsCapacity);
 
             foreach (var catalogEntry in newVendingMachine.Catalog)
@@ -73,9 +79,15 @@ namespace VendingMachine.UI.Client
 
         public IEnumerable<VendingMachineState> GetVendingMachineStates()
         {
+            logger.Info("Retrieving all vending machine states.");
+
             using (var vendingMachinesStatesRepository = new VendingMachinesStatesRepository())
             {
-                return vendingMachinesStatesRepository.GetAllStates();
+                var states = vendingMachinesStatesRepository.GetAllStates();
+
+                logger.Info($"Retrieved {states.Count()} vending machine states.");
+
+                return states;
             }
         }
 
@@ -90,6 +102,8 @@ namespace VendingMachine.UI.Client
 
         public void SaveVendingMachineState(string name)
         {
+            logger.Info($"Saving current vending machine under name '{name}'.");
+
             CurrentVendingMachineName = name;
 
             using (var vendingMachinesStatesRepository = new VendingMachinesStatesRepository())
@@ -100,11 +114,15 @@ namespace VendingMachine.UI.Client
 
         public void ResetDatabase()
         {
+            logger.Info($"Reseting database.");
+
             VendingMachinesStatesRepository.ResetDatabase();
         }
 
         public void ExitApplication()
         {
+            logger.Info($"Exiting Vending Machine client application.");
+
             Application.Exit();
         }
     }

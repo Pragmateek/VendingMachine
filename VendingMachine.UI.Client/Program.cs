@@ -1,4 +1,7 @@
-﻿using System;
+﻿using log4net;
+using log4net.Config;
+using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using VendingMachine.Business.Implementation;
@@ -10,6 +13,8 @@ namespace VendingMachine.UI.Client
 {
     class Program
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(Program));
+
         static void ShowCashRegisterSlot()
         {
             var cashRegisterSlot = new CashRegisterSlot(CoinsTypesRepository.FiftySwissFrancCents, 10);
@@ -124,6 +129,10 @@ namespace VendingMachine.UI.Client
         [STAThread]
         static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new FileInfo("log4net.config"));
+
+            logger.Info("Starting Vending Machine client application.");
+
             var mainWindowModel = new MainWindowModel
             {
                 Configuration = new Configuration
