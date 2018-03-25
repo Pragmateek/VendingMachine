@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\VendingMachinesStatesViewModel.cs" />
     <Compile Include="ViewModels\VendingMachineViewModel.cs" />
     <Compile Include="ViewModels\ProductsChoicesViewModel.cs" />
     <Compile Include="ViewModels\ProductChoiceViewModel.cs" />
@@ -116,6 +117,10 @@
     <ProjectReference Include="..\VendingMachine.Business.Implementation\VendingMachine.Business.Implementation.csproj">
       <Project>{84601ca9-cb96-4d7b-9981-980a755057eb}</Project>
       <Name>VendingMachine.Business.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VendingMachine.Data\VendingMachine.Data.csproj">
+      <Project>{2ee5aca9-2706-4ae2-94e5-863de37f4077}</Project>
+      <Name>VendingMachine.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

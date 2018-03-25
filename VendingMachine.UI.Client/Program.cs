@@ -68,7 +68,7 @@ namespace VendingMachine.UI.Client
 
         static void ShowVendingMachineStore()
         {
-            var vendingMachine = new LombardOdierVendingMachine();
+            var vendingMachine = new LombardOdierVendingMachine(10, 100);
             var items = ItemsFactory.Make(ProductsRepository.Evian, 7)
                 .Then(ProductsRepository.CocaCola, 5)
                 .Then(ProductsRepository.Fanta, 6);
@@ -89,7 +89,7 @@ namespace VendingMachine.UI.Client
 
         static void ShowVendingMachineControlPanel()
         {
-            var vendingMachine = new LombardOdierVendingMachine();
+            var vendingMachine = new LombardOdierVendingMachine(10, 100);
 
             var controlPanelViewModel = new ControlPanelViewModel(vendingMachine.ControlPanel);
             var controlPanelView = new ControlPanelView(controlPanelViewModel)
@@ -106,7 +106,7 @@ namespace VendingMachine.UI.Client
 
         static void ShowVendingMachine()
         {
-            var vendingMachine = new LombardOdierVendingMachine();
+            var vendingMachine = new LombardOdierVendingMachine(10, 100);
 
             var vendingMachineViewModel = new VendingMachineViewModel(vendingMachine);
             var vendingMachineView = new VendingMachineView(vendingMachineViewModel)
@@ -124,7 +124,16 @@ namespace VendingMachine.UI.Client
         [STAThread]
         static void Main(string[] args)
         {
-            new MainWindow().ShowDialog();
+            var mainWindowModel = new MainWindowModel
+            {
+                Configuration = new Configuration
+                {
+                    StoreSlotsCapacity = 10,
+                    CashRegisterSlotsCapacity = 100
+                }
+            };
+
+            new MainWindow(mainWindowModel).ShowDialog();
         }
     }
 }

@@ -69,5 +69,10 @@ namespace VendingMachine.Business.Implementation
                 Equals(otherVendingMachine.CashRegister, CashRegister) &&
                 Equals(otherVendingMachine.ControlPanel, ControlPanel);
         }
+
+        public override int GetHashCode()
+        {
+            return Catalog.GetHashCode() ^ Store.GetHashCode() ^ CashRegister.GetHashCode() ^ ControlPanel.GetHashCode();
+        }
     }
 }

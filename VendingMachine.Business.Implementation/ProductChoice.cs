@@ -38,5 +38,10 @@ namespace VendingMachine.Business.Implementation
                 Equals(otherProductChoice.CatalogEntry, CatalogEntry) &&
                 otherProductChoice.IsPossible == IsPossible;
         }
+
+        public override int GetHashCode()
+        {
+            return CatalogEntry.GetHashCode() ^ IsPossible.GetHashCode();
+        }
     }
 }
