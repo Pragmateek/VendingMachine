@@ -93,6 +93,7 @@ namespace VendingMachine.UI.Client
                 AutoSize = true,
                 Dock = DockStyle.Fill
             };
+            initialBottlesCountInput.DataBindings.Add(nameof(NumericUpDown.Value), this, "Model.Configuration.InitialBottlesCount");
             initialBottlesCountInput.DataBindings.Add(nameof(NumericUpDown.Maximum), this, "Model.Configuration.StoreSlotsCapacity");
 
             var itemsLayout = new TableLayoutPanel
@@ -192,11 +193,13 @@ namespace VendingMachine.UI.Client
             layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             layout.Controls.Add(capacitiesSection);
             layout.Controls.Add(itemsSection);
             layout.Controls.Add(databaseSection);
+            layout.Controls.Add(new Panel());
             layout.Controls.Add(saveButton);
 
             Controls.Add(layout);

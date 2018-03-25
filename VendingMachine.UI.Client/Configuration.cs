@@ -34,16 +34,16 @@ namespace VendingMachine.UI.Client
             }
         }
 
-        private uint initialBottleCount;
-        public uint InitialBottleCount
+        private uint initialBottlesCount;
+        public uint InitialBottlesCount
         {
-            get { return initialBottleCount; }
+            get { return initialBottlesCount; }
             set
             {
-                if (value != initialBottleCount)
+                if (value != initialBottlesCount)
                 {
-                    initialBottleCount = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(InitialBottleCount)));
+                    initialBottlesCount = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(InitialBottlesCount)));
                 }
             }
         }

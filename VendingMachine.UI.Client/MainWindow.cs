@@ -2,8 +2,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using VendingMachine.Data;
-using VendingMachine.Tools;
 using VendingMachine.UI.Controls;
 using VendingMachine.UI.Controls.ViewModels;
 using VendingMachine.UI.Controls.Views;
@@ -31,9 +29,11 @@ namespace VendingMachine.UI.Client
             fileItem.MenuItems.Add("New Vending Machine", NewVendingMachineMenuItem_Click);
             fileItem.MenuItems.Add("Open Vending Machine", OpenVendingMachineMenuItem_Click);
             fileItem.MenuItems.Add("Save Vending Machine", SaveVendingMachineStateMenuItem_Click);
+            fileItem.MenuItems.Add("Exit", ExitMenuItem_Click);
 
             var toolsItem = new MenuItem("Tools");
             toolsItem.MenuItems.Add("Configuration", ConfigurationMenuItem_Click);
+            toolsItem.MenuItems.Add("Reset Database", ResetDatabaseMenuItem_Click);
 
             Menu.MenuItems.Add(fileItem);
             Menu.MenuItems.Add(toolsItem);
@@ -105,6 +105,16 @@ namespace VendingMachine.UI.Client
             Model.SaveVendingMachineState(name);
         }
 
+        private void ResetDatabaseMenuItem_Click(object sender, EventArgs args)
+        {
+            var confirmationResult = MessageBox.Show("This will delete all the saved vending machines, continue?", "Confirm database reset", MessageBoxButtons.YesNo);
+
+            if (confirmationResult == DialogResult.Yes)
+            {
+                Model.ResetDatabase();
+            }
+        }
+
         private void ConfigurationMenuItem_Click(object sender, EventArgs args)
         {
             var configurationViewModel = new ConfigurationViewModel(Model.Configuration);
@@ -117,7 +127,8 @@ namespace VendingMachine.UI.Client
             var popup = new Form
             {
                 AutoSize = true,
-                //AutoSizeMode = AutoSizeMode.GrowAndShrink
+                FormBorderStyle = FormBorderStyle.FixedSingle,
+                MaximizeBox = false
             };
 
             popup.Controls.Add(configurationView);
@@ -125,6 +136,11 @@ namespace VendingMachine.UI.Client
             configurationViewModel.ConfigurationSaved += (_1, _2) => popup.Close();
 
             popup.ShowDialog();
+        }
+
+        private void ExitMenuItem_Click(object sender, EventArgs args)
+        {
+            Model.ExitApplication();
         }
     }
 }

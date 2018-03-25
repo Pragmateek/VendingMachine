@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 using VendingMachine.Data;
@@ -38,6 +39,8 @@ namespace VendingMachine.UI.Client
             }
         }
 
+        private int currentVendingMachineId;
+
         private Configuration configuration;
         public Configuration Configuration
         {
@@ -58,12 +61,14 @@ namespace VendingMachine.UI.Client
 
             foreach (var catalogEntry in newVendingMachine.Catalog)
             {
-                var initialItems = ItemsFactory.Make(catalogEntry.Product, Configuration.InitialBottleCount);
+                var initialItems = ItemsFactory.Make(catalogEntry.Product, Configuration.InitialBottlesCount);
 
                 newVendingMachine.Feed(initialItems);
             }
 
             CurrentVendingMachine = newVendingMachine;
+            CurrentVendingMachineName = null;
+            currentVendingMachineId = 0;
         }
 
         public IEnumerable<VendingMachineState> GetVendingMachineStates()
@@ -79,7 +84,8 @@ namespace VendingMachine.UI.Client
             var vendingMachine = VendingMachinesStatesRepository.GetVendingMachineFromState(state);
 
             CurrentVendingMachine = vendingMachine;
-            CurrentVendingMachineName = state.Name; 
+            CurrentVendingMachineName = state.Name;
+            currentVendingMachineId = state.Id;
         }
 
         public void SaveVendingMachineState(string name)
@@ -88,8 +94,18 @@ namespace VendingMachine.UI.Client
 
             using (var vendingMachinesStatesRepository = new VendingMachinesStatesRepository())
             {
-                vendingMachinesStatesRepository.SaveStateOf(CurrentVendingMachine, CurrentVendingMachineName);
+                currentVendingMachineId = vendingMachinesStatesRepository.SaveStateOf(CurrentVendingMachine, CurrentVendingMachineName, currentVendingMachineId);
             }
+        }
+
+        public void ResetDatabase()
+        {
+            VendingMachinesStatesRepository.ResetDatabase();
+        }
+
+        public void ExitApplication()
+        {
+            Application.Exit();
         }
     }
 }
