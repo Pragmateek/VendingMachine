@@ -26,7 +26,7 @@ namespace VendingMachine.UI.Controls.ViewModels
             }
         }
 
-        public string InsertedAmountText => $"{ControlPanel.AcceptedCoinsTypes.First().Currency} {ControlPanel.InsertedCoins.Sum(coin => coin.Type.FaceValue)}";
+        public string InsertedAmountText => $"{ControlPanel.AcceptedCoinsTypes.First().Currency} {ControlPanel.InsertedAmount}";
 
         public bool CanRefund => ControlPanel.InsertedCoins.Any();
 

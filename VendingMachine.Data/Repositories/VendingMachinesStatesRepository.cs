@@ -12,7 +12,6 @@ namespace VendingMachine.Data
 {
     public class VendingMachinesStatesRepository : IDisposable
     {
-        private Configuration configuration;
         private static ISessionFactory sessionFactory;
 
         public static string DatabasePath { get; private set; }

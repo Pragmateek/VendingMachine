@@ -43,5 +43,10 @@ namespace VendingMachine.Business.Implementation
         {
             return new VendingMachineItemsFactoryProduction(product, quantity);
         }
+
+        public static IItem Make(IProduct product)
+        {
+            return Make(product, 1).Single();
+        }
     }
 }

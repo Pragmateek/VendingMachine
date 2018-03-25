@@ -1,4 +1,5 @@
-﻿using VendingMachine.Business.Contracts;
+﻿using System;
+using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.Business.Implementation
 {
@@ -8,7 +9,19 @@ namespace VendingMachine.Business.Implementation
 
         public Currency(string name)
         {
-            Name = name;
+            Name = name ?? throw new ArgumentNullException(nameof(name), "A currency must have a name!");
+        }
+
+        public override bool Equals(object obj)
+        {
+            var otherCurrency = obj as Currency;
+
+            return otherCurrency.Name == Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
         }
 
         public override string ToString()

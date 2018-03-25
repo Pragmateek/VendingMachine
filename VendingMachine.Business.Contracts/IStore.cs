@@ -7,5 +7,7 @@ namespace VendingMachine.Business.Contracts
         IEnumerable<IStoreSlot> Slots { get; }
 
         void Put(IEnumerable<IItem> newItems);
+
+        bool TryGet(IProduct product, out IItem item);
     }
 }

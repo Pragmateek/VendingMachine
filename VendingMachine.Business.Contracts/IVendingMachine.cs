@@ -16,6 +16,6 @@ namespace VendingMachine.Business.Contracts
         void Feed(IEnumerable<IItem> items);
         void Insert(ICoin coin);
         void Insert(IEnumerable<ICoin> coins);
-        bool TryBuyItem(IProduct product);
+        bool TryBuyItem(IProduct product, out IItem item);
     }
 }

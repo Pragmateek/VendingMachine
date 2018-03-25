@@ -13,5 +13,7 @@ namespace VendingMachine.Business.Contracts
 
         void Store(IItem newItem);
         void Store(IEnumerable<IItem> newItems);
+
+        IItem TakeOne();
     }
 }

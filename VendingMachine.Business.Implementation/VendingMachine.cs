@@ -19,7 +19,7 @@ namespace VendingMachine.Business.Implementation
         public IControlPanel ControlPanel => controlPanel;
 
         public ICurrency Currency { get; private set; }
-        public decimal InsertedAmount { get; private set; }
+        public decimal InsertedAmount => ControlPanel.InsertedAmount;
 
         public VendingMachine(ICatalog catalog, uint storeSlotsCapacity, IEnumerable<ICoinType> acceptedCoinsTypes, uint cashRegisterCapacity)
         {
@@ -27,7 +27,7 @@ namespace VendingMachine.Business.Implementation
             this.acceptedCoinsTypes = acceptedCoinsTypes;
             store = new Store(catalog, storeSlotsCapacity);
             cashRegister = new CashRegister(acceptedCoinsTypes, cashRegisterCapacity);
-            controlPanel = new ControlPanel(catalog, acceptedCoinsTypes, cashRegister);
+            controlPanel = new ControlPanel(catalog, acceptedCoinsTypes, store, cashRegister);
         }
 
         public void Feed(IEnumerable<IItem> items)
@@ -37,12 +37,12 @@ namespace VendingMachine.Business.Implementation
 
         public void Insert(ICoin coin)
         {
-            cashRegister.Put(coin);
+            controlPanel.Insert(coin);
         }
 
         public void Insert(IEnumerable<ICoin> coins)
         {
-            cashRegister.Put(coins);
+            controlPanel.Insert(coins);
         }
 
         public IEnumerable<ICoin> Refund()
@@ -54,9 +54,9 @@ namespace VendingMachine.Business.Implementation
             return coins;
         }
 
-        public bool TryBuyItem(IProduct product)
+        public bool TryBuyItem(IProduct product, out IItem item)
         {
-            throw new NotImplementedException();
+            return controlPanel.TryBuy(product, out item);
         }
 
         public override bool Equals(object obj)

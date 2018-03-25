@@ -87,6 +87,10 @@
       <Project>{2ee5aca9-2706-4ae2-94e5-863de37f4077}</Project>
       <Name>VendingMachine.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VendingMachine.LombardOdier\VendingMachine.LombardOdier.csproj">
+      <Project>{1ad09f35-e013-4ff3-8d74-8cb015d95ea8}</Project>
+      <Name>VendingMachine.LombardOdier</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,9 +28,16 @@ namespace VendingMachine.Business.Implementation
             }
         }
 
+        private IStoreSlot GetSlotFor(IProduct product)
+        {
+            var productSlot = slots.SingleOrDefault(slot => slot.CatalogEntry.Product == product);
+
+            return productSlot;
+        }
+
         public void Put(IItem newItem)
         {
-            var itemProductSlot = slots.SingleOrDefault(slot => slot.CatalogEntry.Product == newItem.Product);
+            var itemProductSlot = GetSlotFor(newItem.Product);
 
             if (itemProductSlot == null)
             {
@@ -38,6 +45,15 @@ namespace VendingMachine.Business.Implementation
             }
 
             itemProductSlot.Store(newItem);
+        }
+
+        public bool TryGet(IProduct product, out IItem item)
+        {
+            var productSlot = GetSlotFor(product);
+
+            item = productSlot.TakeOne();
+
+            return item != null;
         }
 
         //public IEnumerator<IStoreSlot> GetEnumerator()

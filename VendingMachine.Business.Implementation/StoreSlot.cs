@@ -44,9 +44,14 @@ namespace VendingMachine.Business.Implementation
             ItemsChanged(this, EventArgs.Empty);
         }
 
-        public void Take(IItem product)
+        public IItem TakeOne()
         {
+            if (items.Count == 0)
+            {
+                return null;
+            }
 
+            return items.Dequeue();
         }
 
         public IEnumerator<IItem> GetEnumerator()
