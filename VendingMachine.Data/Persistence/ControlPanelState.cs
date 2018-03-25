@@ -6,7 +6,7 @@ namespace VendingMachine.Data
     public class ControlPanelState
     {
         public virtual int Id { get; set; }
-        public virtual string InsertedCoinsTypesNames { get; set; }
+        public virtual decimal InsertedAmount { get; set; }
 
         public ControlPanelState()
         {
@@ -14,7 +14,8 @@ namespace VendingMachine.Data
 
         public ControlPanelState(IControlPanel controlPanel)
         {
-            InsertedCoinsTypesNames = string.Join(",", controlPanel.InsertedCoins.Select(coin => coin.Type));
+            //InsertedCoinsTypesNames = string.Join(",", controlPanel.InsertedCoins.Select(coin => coin.Type));
+            InsertedAmount = controlPanel.InsertedAmount;
         }
     }
 }

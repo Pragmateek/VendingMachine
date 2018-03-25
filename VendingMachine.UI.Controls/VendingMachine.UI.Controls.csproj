@@ -122,6 +122,10 @@
       <Project>{2ee5aca9-2706-4ae2-94e5-863de37f4077}</Project>
       <Name>VendingMachine.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VendingMachine.Tools\VendingMachine.Tools.csproj">
+      <Project>{35c1c840-8732-4f80-a4d2-50acc6631d2b}</Project>
+      <Name>VendingMachine.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -30,7 +31,7 @@ namespace VendingMachine.UI.Controls
 
         private void RegenerateItemsViews()
         {
-            foreach (PictureBox pictureBox in itemsPicturesLayout.Controls)
+            foreach (var pictureBox in itemsPicturesLayout.Controls.OfType<PictureBox>())
             {
                 pictureBox.LoadCompleted -= ItemPicture_LoadCompleted;
             }
@@ -99,7 +100,6 @@ namespace VendingMachine.UI.Controls
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle
             };
-
             textView.DataBindings.Add("Text", this, targetPropertyPath);
 
             return textView;
@@ -113,7 +113,7 @@ namespace VendingMachine.UI.Controls
                 //AutoSize = true,
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.LightCoral
+                //BackColor = Color.LightCoral
             };
 
             var productNameView = GetTexView("Model.ProductNameText");

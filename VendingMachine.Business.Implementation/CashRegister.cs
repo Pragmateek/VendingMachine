@@ -38,6 +38,12 @@ namespace VendingMachine.Business.Implementation
             }
         }
 
+        public bool CanGetChangeOn(decimal amount)
+        {
+            IEnumerable<ICoin> coins;
+            return TryGetInternal(Slots, amount, out coins);
+        }
+
         private bool TryGetInternal(IEnumerable<ICashRegisterSlot> slots, decimal amount, out IEnumerable<ICoin> coins)
         {
             coins = Enumerable.Empty<ICoin>();
@@ -101,7 +107,14 @@ namespace VendingMachine.Business.Implementation
 
         public bool TryGetChange(decimal amount, out IEnumerable<ICoin> coins)
         {
-            return TryGetInternal(Slots, amount, out coins);
+            var canGetChange = TryGetInternal(Slots, amount, out coins);
+
+            if (canGetChange)
+            {
+                Remove(coins);
+            }
+
+            return canGetChange;
         }
 
         public void Remove(IEnumerable<ICoin> coins)

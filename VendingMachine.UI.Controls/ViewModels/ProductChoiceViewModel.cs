@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.UI.Controls.ViewModels
@@ -6,6 +7,8 @@ namespace VendingMachine.UI.Controls.ViewModels
     public class ProductChoiceViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public event EventHandler ChoiceMade = delegate { };
 
         private IProductChoice productChoice;
         public IProductChoice ProductChoice
@@ -27,6 +30,11 @@ namespace VendingMachine.UI.Controls.ViewModels
         public ProductChoiceViewModel(IProductChoice productChoice)
         {
             this.productChoice = productChoice;
+        }
+
+        public void MakeChoice()
+        {
+            ChoiceMade(this, EventArgs.Empty);
         }
     }
 }

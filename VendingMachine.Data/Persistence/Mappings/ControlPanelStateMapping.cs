@@ -8,7 +8,8 @@ namespace VendingMachine.Data
         public ControlPanelStateMapping()
         {
             Id(cps => cps.Id, m => m.Generator(Generators.Identity));
-            Property(cps => cps.InsertedCoinsTypesNames);
+            //Property(cps => cps.InsertedCoinsTypesNames);
+            Property(cps => cps.InsertedAmount);
         }
     }
 }

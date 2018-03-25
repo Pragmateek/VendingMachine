@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using VendingMachine.Business.Contracts;
 
 namespace VendingMachine.UI.Controls.ViewModels
@@ -15,7 +16,15 @@ namespace VendingMachine.UI.Controls.ViewModels
             {
                 if (value != slot)
                 {
+                    if (slot != null)
+                    {
+                        slot.ItemsChanged -= Slot_ItemsChanged;
+                    }
                     slot = value;
+                    if (slot != null)
+                    {
+                        slot.ItemsChanged += Slot_ItemsChanged;
+                    }
                     PropertyChanged(this, new PropertyChangedEventArgs(nameof(Slot)));
                     PropertyChanged(this, new PropertyChangedEventArgs(nameof(SlotProductImagePath)));
                 }
@@ -32,7 +41,12 @@ namespace VendingMachine.UI.Controls.ViewModels
 
         public StoreSlotViewModel(IStoreSlot slot)
         {
-            this.slot = slot;
+            Slot = slot;
+        }
+
+        private void Slot_ItemsChanged(object sender, EventArgs e)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(CountCapacityText)));
         }
     }
 }

@@ -65,7 +65,7 @@ namespace VendingMachine.UI.Controls
                 RowCount = 1,
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.LightGreen
+                //BackColor = Color.LightGreen
             };
 
             this.Controls.Add(slotsViewsLayout);

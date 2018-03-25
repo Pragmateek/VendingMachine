@@ -21,7 +21,7 @@ namespace VendingMachine.UI.Controls
                 ColumnCount = 1,
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.AliceBlue
+                //BackColor = Color.AliceBlue
             };
 
             var rowHeight = 100f / n;
@@ -31,6 +31,7 @@ namespace VendingMachine.UI.Controls
                 layout.RowStyles.Add(new RowStyle(SizeType.Percent, rowHeight));
 
                 var productChoiceViewModel = new ProductChoiceViewModel(productChoice);
+                productChoiceViewModel.ChoiceMade += (_1, _2) => Model.MakeChoice(productChoice);
                 var productChoiceView = new ProductChoiceView(productChoiceViewModel)
                 {
                     Dock = DockStyle.Fill

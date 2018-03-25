@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using VendingMachine.Business.Contracts;
+using VendingMachine.Tools;
 
 namespace VendingMachine.Business.Implementation
 {
@@ -18,15 +19,15 @@ namespace VendingMachine.Business.Implementation
 
         public decimal InsertedAmount { get; private set; }
 
-        private IList<ICoin> insertedCoins = new List<ICoin>();
-        public IEnumerable<ICoin> InsertedCoins => insertedCoins;
+        //private IList<ICoin> insertedCoins = new List<ICoin>();
+        //public IEnumerable<ICoin> InsertedCoins => insertedCoins;
 
         private readonly IEnumerable<ProductChoice> productsChoices;
         public IEnumerable<IProductChoice> ProductsChoices => productsChoices;
 
         private readonly ICashRegister cashRegister;
 
-        public ControlPanel(ICatalog productsCatalog, IEnumerable<ICoinType> acceptedCoinsTypes, IStore store, ICashRegister cashRegister/*IVendingMachine controlledVendingMachine*/)
+        public ControlPanel(ICatalog productsCatalog, IEnumerable<ICoinType> acceptedCoinsTypes, IStore store, ICashRegister cashRegister)
         {
             this.catalog = productsCatalog;
             this.productsChoices = productsCatalog.Select(catalogEntry => new ProductChoice(catalogEntry)).ToArray();
@@ -35,11 +36,20 @@ namespace VendingMachine.Business.Implementation
             this.cashRegister = cashRegister;
         }
 
+        private void NotifyMoneyChanged()
+        {
+            //PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedCoins)));
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedAmount)));
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(CanRefund)));
+        }
+
         private void UpdateChoicesStates()
         {
             foreach (var productChoice in productsChoices)
             {
-                productChoice.IsPossible = InsertedAmount >= productChoice.CatalogEntry.Price.Amount;
+                var isProductAvailable = store.Has(productChoice.CatalogEntry.Product);
+                var isNotTooExpensive = productChoice.CatalogEntry.Price.Amount <= InsertedAmount;
+                productChoice.IsPossible = isProductAvailable && isNotTooExpensive;
             }
         }
 
@@ -50,14 +60,14 @@ namespace VendingMachine.Business.Implementation
                 throw new Exception($"'{coin}' is not accepted!");
             }
 
-            insertedCoins.Add(coin);
+            //insertedCoins.Add(coin);
             InsertedAmount += coin.Type.FaceValue;
 
             cashRegister.Put(coin);
 
             UpdateChoicesStates();
 
-            PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedCoins)));
+            NotifyMoneyChanged();
         }
 
         public void Insert(IEnumerable<ICoin> coins)
@@ -68,19 +78,25 @@ namespace VendingMachine.Business.Implementation
             }
         }
 
+        public bool CanRefund => cashRegister.CanGetChangeOn(InsertedAmount);
+
         public IEnumerable<ICoin> Refund()
         {
-            var insertedCoins = this.insertedCoins.ToArray();
+            //var insertedCoins = this.insertedCoins.ToArray();
 
-            cashRegister.Remove(insertedCoins);
+            IEnumerable<ICoin> refundCoins;
+            if (!cashRegister.TryGetChange(InsertedAmount, out refundCoins))
+            {
+                return refundCoins;
+            }
 
-            this.insertedCoins.Clear();
+            //this.insertedCoins.Clear();
             InsertedAmount = 0;
-            PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedCoins)));
+            NotifyMoneyChanged();
 
             UpdateChoicesStates();
 
-            return insertedCoins;
+            return refundCoins;
         }
 
         public bool TryBuy(IProduct product, out IItem item)
@@ -101,6 +117,9 @@ namespace VendingMachine.Business.Implementation
 
             InsertedAmount -= catalogEntry.Price.Amount;
 
+            NotifyMoneyChanged();
+            UpdateChoicesStates();
+
             return true;
         }
 
@@ -110,13 +129,13 @@ namespace VendingMachine.Business.Implementation
 
             return otherControlPanel != null &&
                 otherControlPanel.AcceptedCoinsTypes.SequenceEqual(AcceptedCoinsTypes) &&
-                otherControlPanel.InsertedCoins.SequenceEqual(InsertedCoins) &&
+                //otherControlPanel.InsertedCoins.SequenceEqual(InsertedCoins) &&
                 otherControlPanel.ProductsChoices.SequenceEqual(ProductsChoices);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return acceptedCoinsTypes.GetElementsHashCode();
         }
     }
 }

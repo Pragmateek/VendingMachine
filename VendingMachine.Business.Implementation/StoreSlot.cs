@@ -51,7 +51,11 @@ namespace VendingMachine.Business.Implementation
                 return null;
             }
 
-            return items.Dequeue();
+            var item = items.Dequeue();
+
+            ItemsChanged(this, EventArgs.Empty);
+
+            return item;
         }
 
         public IEnumerator<IItem> GetEnumerator()

@@ -35,13 +35,13 @@ namespace VendingMachine.Business.Implementation
             var otherProductChoice = obj as ProductChoice;
 
             return otherProductChoice != null &&
-                Equals(otherProductChoice.CatalogEntry, CatalogEntry) &&
-                otherProductChoice.IsPossible == IsPossible;
+                Equals(otherProductChoice.CatalogEntry, CatalogEntry)/* &&
+                otherProductChoice.IsPossible == IsPossible*/;
         }
 
         public override int GetHashCode()
         {
-            return CatalogEntry.GetHashCode() ^ IsPossible.GetHashCode();
+            return CatalogEntry.GetHashCode();
         }
     }
 }

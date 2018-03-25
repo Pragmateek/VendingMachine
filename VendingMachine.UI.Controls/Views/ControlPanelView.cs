@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
+using VendingMachine.Tools;
 using VendingMachine.UI.Controls.ViewModels;
 
 namespace VendingMachine.UI.Controls
@@ -36,10 +37,12 @@ namespace VendingMachine.UI.Controls
             {
                 Dock = DockStyle.Fill
             };
-            refundInput.DataBindings.Add("Enabled", this, "Model.CanRefund");
+            refundInput.DataBindings.Add("Enabled", this, "Model.ControlPanel.CanRefund");
             refundInput.Click += RefundInput_Click;
 
             var productsChoicesViewModel = new ProductsChoicesViewModel(Model.ControlPanel.ProductsChoices);
+            productsChoicesViewModel.ChoiceMade += ProductsChoicesViewModel_ChoiceMade;
+
             var productsChoicesView = new ProductsChoicesView(productsChoicesViewModel)
             {
                 Dock = DockStyle.Fill
@@ -62,6 +65,12 @@ namespace VendingMachine.UI.Controls
             layout.Controls.Add(productsChoicesView, 0, 3);
 
             Controls.Add(layout);
+        }
+
+        private void ProductsChoicesViewModel_ChoiceMade(object sender, ValueEventArg<IProductChoice> e)
+        {
+            IItem item;
+            Model.ControlPanel.TryBuy(e.Value.CatalogEntry.Product, out item);
         }
 
         private void RefundInput_Click(object sender, System.EventArgs e)

@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using VendingMachine.Business.Contracts;
+using VendingMachine.Tools;
 
 namespace VendingMachine.UI.Controls.ViewModels
 {
     public class ProductsChoicesViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public event EventHandler<ValueEventArg<IProductChoice>> ChoiceMade = delegate { };
 
         private IEnumerable<IProductChoice> productsChoices;
         public IEnumerable<IProductChoice> ProductsChoices
@@ -25,6 +29,11 @@ namespace VendingMachine.UI.Controls.ViewModels
         public ProductsChoicesViewModel(IEnumerable<IProductChoice> productsChoices)
         {
             this.productsChoices = productsChoices;
+        }
+
+        public void MakeChoice(IProductChoice productChoice)
+        {
+            ChoiceMade(this, new ValueEventArg<IProductChoice>(productChoice));
         }
     }
 }

@@ -32,7 +32,8 @@ namespace VendingMachine.Data
             CatalogState = string.Join(",", vendingMachine.Catalog.Select(entry => $"{entry.Product}:{entry.Price.Currency}{entry.Price.Amount.ToString(CultureInfo.InvariantCulture)}"));
             StoreState = string.Join(",", vendingMachine.Store.Slots.Select(slot => $"{slot.CatalogEntry.Product.Name}:{slot.Count}/{slot.Capacity}"));
             CashRegisterState = string.Join(",", vendingMachine.CashRegister.Slots.Select(slot => $"{slot.CoinType.Name}:{slot.Count}/{slot.Capacity}"));
-            ControlPanelState = string.Join(",", vendingMachine.ControlPanel.InsertedCoins.Select(coin => coin.Type.Name));
+            //ControlPanelState = string.Join(",", vendingMachine.ControlPanel.InsertedCoins.Select(coin => coin.Type.Name));
+            ControlPanelState = vendingMachine.ControlPanel.InsertedAmount.ToString(CultureInfo.InvariantCulture);
         }
 
         public virtual IVendingMachine AsVendingMachine()

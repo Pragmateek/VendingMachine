@@ -8,6 +8,8 @@ namespace VendingMachine.Business.Contracts
 
         void Put(IEnumerable<IItem> newItems);
 
+        bool Has(IProduct product);
+
         bool TryGet(IProduct product, out IItem item);
     }
 }

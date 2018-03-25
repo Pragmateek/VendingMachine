@@ -5,9 +5,11 @@ namespace VendingMachine.Business.Contracts
     public interface IControlPanel
     {
         IEnumerable<ICoinType> AcceptedCoinsTypes { get; }
-        IEnumerable<ICoin> InsertedCoins { get; }
+        //IEnumerable<ICoin> InsertedCoins { get; }
 
         decimal InsertedAmount { get; }
+
+        bool CanRefund { get; }
 
         IEnumerable<IProductChoice> ProductsChoices { get; }
 

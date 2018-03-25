@@ -39,7 +39,16 @@ namespace VendingMachine.UI.Client
 
         public void NewVendingMachine()
         {
-            CurrentVendingMachine = new LombardOdierVendingMachine(Configuration.StoreSlotsCapacity, Configuration.CashRegisterSlotsCapacity);
+            var newVendingMachine = new LombardOdierVendingMachine(Configuration.StoreSlotsCapacity, Configuration.CashRegisterSlotsCapacity);
+
+            foreach (var catalogEntry in newVendingMachine.Catalog)
+            {
+                var initialItems = ItemsFactory.Make(catalogEntry.Product, Configuration.InitialBottleCount);
+
+                newVendingMachine.Feed(initialItems);
+            }
+
+            CurrentVendingMachine = newVendingMachine;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 using VendingMachine.Data;
@@ -117,6 +118,33 @@ namespace VendingMachine.Tests
             Assert.IsTrue(canBuyAnEvianBottle);
             Assert.IsNotNull(EvianBottle);
             Assert.AreEqual(5m - 1.1m, vendingMachine.InsertedAmount);
+        }
+
+        [TestMethod]
+        public void CanRefundOnlyIfCoinsAreAvailable()
+        {
+            var vendingMachine = new LombardOdierVendingMachine(10, 100);
+
+            vendingMachine.Feed(ItemsFactory.Make(ProductsRepository.Evian, 1));
+            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.OneSwissFranc, 2));
+
+            IItem EvianBottle;
+            var canBuyEvianBottle = vendingMachine.TryBuyItem(ProductsRepository.Evian, out EvianBottle);
+
+            Assert.IsTrue(canBuyEvianBottle);
+            Assert.AreEqual(0.90m, vendingMachine.InsertedAmount);
+
+            var refundCoins = vendingMachine.Refund();
+            Assert.IsFalse(refundCoins.Any());
+            Assert.AreEqual(0.90m, vendingMachine.InsertedAmount);
+
+            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.TenSwissFrancCents));
+
+            refundCoins = vendingMachine.Refund();
+            Assert.IsTrue(refundCoins.Any());
+            Assert.AreEqual(1, refundCoins.Count());
+            Assert.AreEqual(1m, refundCoins.Single().Type.FaceValue);
+            Assert.AreEqual(0.00m, vendingMachine.InsertedAmount);
         }
     }
 }

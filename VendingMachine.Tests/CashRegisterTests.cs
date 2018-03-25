@@ -108,5 +108,22 @@ namespace VendingMachine.Tests
                 Assert.AreEqual(1, coins.Count(coin => coin.Type == coinType));
             }
         }
+
+        [TestMethod]
+        public void ShouldRemoveCoinsFromRegisterWhenChangeIsGivenBack()
+        {
+            var cashRegister = new CashRegister(CoinsTypesRepository.SwissFrancCoins, 10);
+
+            var coins = CoinsFactory.Make(CoinsTypesRepository.OneSwissFranc, 3);
+            cashRegister.Put(coins);
+
+            IEnumerable<ICoin> changeCoins;
+            bool canGetChange = cashRegister.TryGetChange(1m, out changeCoins);
+
+            Assert.IsTrue(canGetChange);
+            Assert.AreEqual(1, changeCoins.Count());
+            Assert.AreEqual(1m, changeCoins.Single().Type.FaceValue);
+            Assert.AreEqual(2m, cashRegister.Amount);
+        }
     }
 }

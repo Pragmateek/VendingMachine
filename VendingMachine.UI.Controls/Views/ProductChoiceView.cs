@@ -30,6 +30,7 @@ namespace VendingMachine.UI.Controls
             };
             buyProductButton.DataBindings.Add("Enabled", this, "Model.ProductChoice.IsPossible");
             buyProductButton.DataBindings.Add("Text", this, "Model.ProductChoice.CatalogEntry.Price");
+            buyProductButton.Click += BuyProductButton_Click;
 
             var layout = new TableLayoutPanel
             {
@@ -37,7 +38,7 @@ namespace VendingMachine.UI.Controls
                 ColumnCount = 2,
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.LightGoldenrodYellow
+                //BackColor = Color.LightGoldenrodYellow
             };
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f * 2 / 3));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f * 1 / 3));
@@ -46,6 +47,11 @@ namespace VendingMachine.UI.Controls
             layout.Controls.Add(buyProductButton, 1, 0);
 
             Controls.Add(layout);
+        }
+
+        private void BuyProductButton_Click(object sender, EventArgs e)
+        {
+            Model.MakeChoice();
         }
 
         private void productView_LoadCompleted(object sender, EventArgs e)

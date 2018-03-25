@@ -130,11 +130,16 @@ namespace VendingMachine.UI.Client
                 {
                     StoreSlotsCapacity = 10,
                     CashRegisterSlotsCapacity = 100,
+                    InitialBottleCount = 5,
                     DatabasePath = VendingMachinesStatesRepository.DatabasePath
                 }
             };
 
-            new MainWindow(mainWindowModel).ShowDialog();
+            new MainWindow(mainWindowModel)
+            {
+                Width = 800,
+                Height = 800
+            }.ShowDialog();
         }
     }
 }

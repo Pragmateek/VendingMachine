@@ -47,9 +47,7 @@ namespace VendingMachine.Business.Implementation
 
         public IEnumerable<ICoin> Refund()
         {
-            IEnumerable<ICoin> coins;
-
-            cashRegister.TryGetChange(InsertedAmount, out coins);
+            IEnumerable<ICoin> coins = controlPanel.Refund();
 
             return coins;
         }

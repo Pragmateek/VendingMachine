@@ -34,7 +34,7 @@ namespace VendingMachine.UI.Controls
                 ColumnCount = 2,
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.LightPink
+                //BackColor = Color.LightPink
             };
             partsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65));
             partsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));

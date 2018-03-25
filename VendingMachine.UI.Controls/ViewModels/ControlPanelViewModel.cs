@@ -28,7 +28,7 @@ namespace VendingMachine.UI.Controls.ViewModels
 
         public string InsertedAmountText => $"{ControlPanel.AcceptedCoinsTypes.First().Currency} {ControlPanel.InsertedAmount}";
 
-        public bool CanRefund => ControlPanel.InsertedCoins.Any();
+        //public bool CanRefund => ControlPanel.InsertedCoins.Any();
 
         public ControlPanelViewModel(IControlPanel controlPanel)
         {
@@ -37,10 +37,10 @@ namespace VendingMachine.UI.Controls.ViewModels
 
         private void ControlPanel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(IControlPanel.InsertedCoins))
+            if (e.PropertyName == nameof(IControlPanel.InsertedAmount))
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(InsertedAmountText)));
-                PropertyChanged(this, new PropertyChangedEventArgs(nameof(CanRefund)));
+                //PropertyChanged(this, new PropertyChangedEventArgs(nameof(CanRefund)));
             }
         }
     }
