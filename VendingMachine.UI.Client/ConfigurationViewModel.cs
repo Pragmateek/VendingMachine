@@ -17,7 +17,9 @@ namespace VendingMachine.UI.Client
             Configuration = new Configuration
             {
                 StoreSlotsCapacity = sourceConfiguration.StoreSlotsCapacity,
-                CashRegisterSlotsCapacity = sourceConfiguration.CashRegisterSlotsCapacity
+                CashRegisterSlotsCapacity = sourceConfiguration.CashRegisterSlotsCapacity,
+                InitialBottleCount = sourceConfiguration.InitialBottleCount,
+                DatabasePath = sourceConfiguration.DatabasePath
             };
         }
 
@@ -25,6 +27,7 @@ namespace VendingMachine.UI.Client
         {
             sourceConfiguration.StoreSlotsCapacity = Configuration.StoreSlotsCapacity;
             sourceConfiguration.CashRegisterSlotsCapacity = Configuration.CashRegisterSlotsCapacity;
+            sourceConfiguration.InitialBottleCount = Configuration.InitialBottleCount;
 
             ConfigurationSaved(this, EventArgs.Empty);
         }

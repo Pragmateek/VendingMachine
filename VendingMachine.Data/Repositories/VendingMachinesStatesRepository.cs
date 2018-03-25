@@ -4,6 +4,7 @@ using NHibernate.Criterion;
 using NHibernate.Mapping.ByCode;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 
@@ -11,12 +12,17 @@ namespace VendingMachine.Data
 {
     public class VendingMachinesStatesRepository : IDisposable
     {
-        private ISessionFactory sessionFactory;
+        private Configuration configuration;
+        private static ISessionFactory sessionFactory;
 
-        public VendingMachinesStatesRepository()
+        public static string DatabasePath { get; private set; }
+
+        static VendingMachinesStatesRepository()
         {
             var configuration = new Configuration();
             configuration.Configure();
+
+            DatabasePath = Regex.Match(configuration.GetProperty("connection.connection_string"), "Data Source=([^;]+);").Groups[1].Value;
 
             var modelMapper = new ModelMapper();
             modelMapper.AddMapping<VendingMachineStateMapping>();

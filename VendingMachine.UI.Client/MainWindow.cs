@@ -66,7 +66,7 @@ namespace VendingMachine.UI.Client
 
             var popup = new Form
             {
-                //AutoSize = true,
+                AutoSize = true,
                 //AutoSizeMode = AutoSizeMode.GrowAndShrink
             };
 
