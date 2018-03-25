@@ -58,6 +58,9 @@
     <Compile Include="Views\ControlPanelView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\VendingMachinesStatesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\VendingMachineView.cs">
       <SubType>UserControl</SubType>
     </Compile>

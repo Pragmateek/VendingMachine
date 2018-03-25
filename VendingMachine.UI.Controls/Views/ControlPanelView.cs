@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
@@ -28,7 +29,7 @@ namespace VendingMachine.UI.Controls
 
             coinsInput = new ComboBox
             {
-                DataSource = Model.ControlPanel.AcceptedCoinsTypes,
+                DataSource = Model.ControlPanel.AcceptedCoinsTypes.ToArray(),
                 Dock = DockStyle.Fill
             };
             coinsInput.SelectionChangeCommitted += CoinsInput_SelectionChangeCommitted;
@@ -67,7 +68,7 @@ namespace VendingMachine.UI.Controls
             Controls.Add(layout);
         }
 
-        private void ProductsChoicesViewModel_ChoiceMade(object sender, ValueEventArg<IProductChoice> e)
+        private void ProductsChoicesViewModel_ChoiceMade(object sender, ValueEventArgs<IProductChoice> e)
         {
             IItem item;
             Model.ControlPanel.TryBuy(e.Value.CatalogEntry.Product, out item);

@@ -2,11 +2,11 @@
 
 namespace VendingMachine.Tools
 {
-    public class ValueEventArg<T> : EventArgs
+    public class ValueEventArgs<T> : EventArgs
     {
         public T Value { get; private set; }
 
-        public ValueEventArg(T value)
+        public ValueEventArgs(T value)
         {
             Value = value;
         }

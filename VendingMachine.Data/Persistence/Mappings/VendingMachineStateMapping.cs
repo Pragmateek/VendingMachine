@@ -8,6 +8,7 @@ namespace VendingMachine.Data
         public VendingMachineStateMapping()
         {
             Id(vms => vms.Id, m => m.Generator(Generators.Identity));
+            Property(vms => vms.Name);
             Property(vms => vms.CatalogState);
             Property(vms => vms.AcceptedCoinsTypesNames);
             Property(vms => vms.StoreSlotsCapacity);

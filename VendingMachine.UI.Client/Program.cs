@@ -46,11 +46,11 @@ namespace VendingMachine.UI.Client
         static void ShowVendingMachineStoreSlot()
         {
             var FantaPrice = new Price(CurrenciesRepository.CHF, 1.60m);
-            var catalogEntry = new CatalogEntry(ProductsRepository.Fanta, FantaPrice);
+            var catalogEntry = new CatalogEntry(ProductsRepository.FantaBottle, FantaPrice);
 
             var slot = new StoreSlot(catalogEntry, 10);
 
-            var items = Enumerable.Range(1, 5).Select(_ => new Item(ProductsRepository.Fanta));
+            var items = Enumerable.Range(1, 5).Select(_ => new Item(ProductsRepository.FantaBottle));
             slot.Store(items);
 
             var vendingMachineStoreSlotViewModel = new StoreSlotViewModel(slot);
@@ -69,9 +69,9 @@ namespace VendingMachine.UI.Client
         static void ShowVendingMachineStore()
         {
             var vendingMachine = new LombardOdierVendingMachine(10, 100);
-            var items = ItemsFactory.Make(ProductsRepository.Evian, 7)
-                .Then(ProductsRepository.CocaCola, 5)
-                .Then(ProductsRepository.Fanta, 6);
+            var items = ItemsFactory.Make(ProductsRepository.EvianBottle, 7)
+                .Then(ProductsRepository.CocaColaBottle, 5)
+                .Then(ProductsRepository.FantaBottle, 6);
             vendingMachine.Feed(items);
 
             var vendingMachineStoreViewModel = new StoreViewModel(vendingMachine.Store);

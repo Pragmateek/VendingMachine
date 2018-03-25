@@ -50,7 +50,8 @@ namespace VendingMachine.UI.Controls
             var cashRegisterViewModel = new CashRegisterViewModel(model.VendingMachine.CashRegister);
             var cashRegisterView = new CashRegisterView(cashRegisterViewModel)
             {
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.FixedSingle
             };
 
             var controlPanelViewModel = new ControlPanelViewModel(model.VendingMachine.ControlPanel);

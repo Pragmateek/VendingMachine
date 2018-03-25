@@ -54,6 +54,13 @@ namespace VendingMachine.Business.Implementation
             return productSlot.Count != 0;
         }
 
+        public uint NumberOf(IProduct product)
+        {
+            var productSlot = GetSlotFor(product);
+
+            return productSlot.Count;
+        }
+
         public bool TryGet(IProduct product, out IItem item)
         {
             var productSlot = GetSlotFor(product);

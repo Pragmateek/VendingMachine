@@ -40,6 +40,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -94,6 +95,10 @@
     <ProjectReference Include="..\VendingMachine.LombardOdier\VendingMachine.LombardOdier.csproj">
       <Project>{1ad09f35-e013-4ff3-8d74-8cb015d95ea8}</Project>
       <Name>VendingMachine.LombardOdier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VendingMachine.Tools\VendingMachine.Tools.csproj">
+      <Project>{35c1c840-8732-4f80-a4d2-50acc6631d2b}</Project>
+      <Name>VendingMachine.Tools</Name>
     </ProjectReference>
     <ProjectReference Include="..\VendingMachine.UI.Controls\VendingMachine.UI.Controls.csproj">
       <Project>{3bf17c3d-8ab1-47c4-8ffe-191b7b10c6f2}</Project>

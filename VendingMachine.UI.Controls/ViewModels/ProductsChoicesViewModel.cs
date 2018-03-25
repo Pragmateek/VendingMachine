@@ -10,7 +10,7 @@ namespace VendingMachine.UI.Controls.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        public event EventHandler<ValueEventArg<IProductChoice>> ChoiceMade = delegate { };
+        public event EventHandler<ValueEventArgs<IProductChoice>> ChoiceMade = delegate { };
 
         private IEnumerable<IProductChoice> productsChoices;
         public IEnumerable<IProductChoice> ProductsChoices
@@ -33,7 +33,7 @@ namespace VendingMachine.UI.Controls.ViewModels
 
         public void MakeChoice(IProductChoice productChoice)
         {
-            ChoiceMade(this, new ValueEventArg<IProductChoice>(productChoice));
+            ChoiceMade(this, new ValueEventArgs<IProductChoice>(productChoice));
         }
     }
 }

@@ -23,9 +23,10 @@ namespace VendingMachine.Data
         {
         }
 
-        public VendingMachineState(IVendingMachine vendingMachine, string name = null)
+        public VendingMachineState(IVendingMachine vendingMachine, string name = null, int id = 0)
         {
             Name = name;
+            Id = id;
             AcceptedCoinsTypesNames = string.Join(",", vendingMachine.AcceptedCoinsTypes.Select(coinType => coinType.Name));
             StoreSlotsCapacity = (int)vendingMachine.Store.Slots.First().Capacity;
             CashRegisterSlotsCapacity = (int)vendingMachine.CashRegister.Slots.First().Capacity;

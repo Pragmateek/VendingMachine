@@ -12,9 +12,9 @@ namespace VendingMachine.Data
             var FantaPrice = new Price(CurrenciesRepository.CHF, 1.60m);
 
             var catalog = new Catalog();
-            catalog.ReferenceProduct(ProductsRepository.Evian, EvianPrice);
-            catalog.ReferenceProduct(ProductsRepository.CocaCola, CocaColaPrice);
-            catalog.ReferenceProduct(ProductsRepository.Fanta, FantaPrice);
+            catalog.ReferenceProduct(ProductsRepository.EvianBottle, EvianPrice);
+            catalog.ReferenceProduct(ProductsRepository.CocaColaBottle, CocaColaPrice);
+            catalog.ReferenceProduct(ProductsRepository.FantaBottle, FantaPrice);
 
             return catalog;
         }

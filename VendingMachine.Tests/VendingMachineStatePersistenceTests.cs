@@ -4,6 +4,8 @@ using VendingMachine.Business.Implementation;
 using Implementation = VendingMachine.Business.Implementation;
 using VendingMachine.Data;
 using VendingMachine.Business.Contracts;
+using System;
+using System.IO;
 
 namespace VendingMachine.Tests
 {
@@ -14,13 +16,13 @@ namespace VendingMachine.Tests
         public void CanSaveAndRetrieveAMachineState()
         {
             var catalog = new Catalog();
-            catalog.ReferenceProduct(ProductsRepository.Evian, new Price(CurrenciesRepository.CHF, 1.1m));
-            catalog.ReferenceProduct(ProductsRepository.Vittel, new Price(CurrenciesRepository.CHF, 1.2m));
-            catalog.ReferenceProduct(ProductsRepository.Volvic, new Price(CurrenciesRepository.CHF, 1.3m));
+            catalog.ReferenceProduct(ProductsRepository.EvianBottle, new Price(CurrenciesRepository.CHF, 1.1m));
+            catalog.ReferenceProduct(ProductsRepository.VittelBottle, new Price(CurrenciesRepository.CHF, 1.2m));
+            catalog.ReferenceProduct(ProductsRepository.VolvicBottle, new Price(CurrenciesRepository.CHF, 1.3m));
 
-            var EvianBottles = ItemsFactory.Make(ProductsRepository.Evian, 3);
-            var VittelBottles = ItemsFactory.Make(ProductsRepository.Vittel, 5);
-            var VolvicBottles = ItemsFactory.Make(ProductsRepository.Volvic, 4);
+            var EvianBottles = ItemsFactory.Make(ProductsRepository.EvianBottle, 3);
+            var VittelBottles = ItemsFactory.Make(ProductsRepository.VittelBottle, 5);
+            var VolvicBottles = ItemsFactory.Make(ProductsRepository.VolvicBottle, 4);
             var allBottles = EvianBottles.Concat(VittelBottles).Concat(VolvicBottles);
 
             var CHF5Coins = CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs, 30);
@@ -44,39 +46,75 @@ namespace VendingMachine.Tests
             {
                 var vendingMachineState = repository.GetStateById(stateId);
 
-                outputVendingMachine = repository.GetVendingMachineFromState(vendingMachineState);
+                outputVendingMachine = VendingMachinesStatesRepository.GetVendingMachineFromState(vendingMachineState);
             }
 
             Assert.AreEqual(inputVendingMachine, outputVendingMachine);
+        }
 
-            //Assert.AreEqual(outputVendingMachine.Catalog.Count(), 3);
-            //var EvianCatalogEntry = outputVendingMachine.Catalog.GetEntryFor(ProductsRepository.Evian);
-            //Assert.AreEqual(new Price(CurrenciesRepository.CHF, 1.1m), EvianCatalogEntry.Price);
+        [TestMethod]
+        public void CanChangeASavedVendingMachineState()
+        {
+            VendingMachinesStatesRepository.ResetDatabase();
 
-            //var VittelCatalogEntry = outputVendingMachine.Catalog.GetEntryFor(ProductsRepository.Vittel);
-            //Assert.AreEqual(new Price(CurrenciesRepository.CHF, 1.2m), VittelCatalogEntry.Price);
+            using (var repository = new VendingMachinesStatesRepository())
+            {
+                var states = repository.GetAllStates();
 
-            //var VolvicCatalogEntry = outputVendingMachine.Catalog.GetEntryFor(ProductsRepository.Volvic);
-            //Assert.AreEqual(new Price(CurrenciesRepository.CHF, 1.3m), VolvicCatalogEntry.Price);
+                Assert.IsFalse(states.Any());
+            }
 
+            var vendingMachine = new LombardOdierVendingMachine(10, 100);
+            vendingMachine.Feed(ItemsFactory.Make(ProductsRepository.EvianBottle, 3));
+            vendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.FiveSwissFrancs, 2));
 
-            //var firstSlot = outputVendingMachine.Store.First();
-            //Assert.AreEqual(ProductsRepository.Evian, firstSlot.CatalogEntry.Product);
-            //Assert.AreEqual(20u, firstSlot.Capacity);
-            //Assert.AreEqual(3u, firstSlot.Count);
+            string name = Guid.NewGuid().ToString();
+            int id;
 
-            //var secondSlot = outputVendingMachine.Store.ElementAt(1);
-            //Assert.AreEqual(ProductsRepository.Vittel, secondSlot.CatalogEntry.Product);
-            //Assert.AreEqual(20u, secondSlot.Capacity);
-            //Assert.AreEqual(5u, secondSlot.Count);
+            using (var repository = new VendingMachinesStatesRepository())
+            {
+                id = repository.SaveStateOf(vendingMachine, name);
+            }
 
-            //var thirdSlot = outputVendingMachine.Store.ElementAt(2);
-            //Assert.AreEqual(ProductsRepository.Volvic, thirdSlot.CatalogEntry.Product);
-            //Assert.AreEqual(20u, thirdSlot.Capacity);
-            //Assert.AreEqual(4u, thirdSlot.Count);
+            IVendingMachine intermediateVendingMachine;
+            using (var repository = new VendingMachinesStatesRepository())
+            {
+                var states = repository.GetAllStates();
 
+                Assert.AreEqual(1, states.Count());
 
-            //var firstCashRegisterSlot = 
+                var state = states.Single();
+                intermediateVendingMachine = VendingMachinesStatesRepository.GetVendingMachineFromState(state);
+            }
+
+            Assert.IsTrue(intermediateVendingMachine.Store.Has(ProductsRepository.EvianBottle));
+            Assert.AreEqual(3u, intermediateVendingMachine.Store.NumberOf(ProductsRepository.EvianBottle));
+            Assert.AreEqual(10m, intermediateVendingMachine.InsertedAmount);
+
+            intermediateVendingMachine.Feed(ItemsFactory.Make(ProductsRepository.CocaColaBottle, 2));
+            intermediateVendingMachine.Insert(CoinsFactory.Make(CoinsTypesRepository.TwoSwissFrancs, 1));
+
+            using (var repository = new VendingMachinesStatesRepository())
+            {
+                repository.SaveStateOf(intermediateVendingMachine, name, id);
+            }
+
+            IVendingMachine finalVendingMachine;
+            using (var repository = new VendingMachinesStatesRepository())
+            {
+                var states = repository.GetAllStates();
+
+                Assert.AreEqual(1, states.Count());
+
+                var state = states.Single();
+                finalVendingMachine = VendingMachinesStatesRepository.GetVendingMachineFromState(state);
+            }
+
+            Assert.IsTrue(finalVendingMachine.Store.Has(ProductsRepository.EvianBottle));
+            Assert.IsTrue(finalVendingMachine.Store.Has(ProductsRepository.CocaColaBottle));
+            Assert.AreEqual(3u, finalVendingMachine.Store.NumberOf(ProductsRepository.EvianBottle));
+            Assert.AreEqual(2u, finalVendingMachine.Store.NumberOf(ProductsRepository.CocaColaBottle));
+            Assert.AreEqual(12m, finalVendingMachine.InsertedAmount);
         }
     }
 }

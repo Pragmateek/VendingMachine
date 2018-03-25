@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using VendingMachine.Data;
+using VendingMachine.Tools;
 using VendingMachine.UI.Controls;
 using VendingMachine.UI.Controls.ViewModels;
+using VendingMachine.UI.Controls.Views;
 
 namespace VendingMachine.UI.Client
 {
@@ -17,6 +21,7 @@ namespace VendingMachine.UI.Client
         public MainWindow(MainWindowModel model)
         {
             Model = model;
+            DataBindings.Add(nameof(Text), Model, nameof(Model.CurrentVendingMachineName));
 
             Model.PropertyChanged += Model_PropertyChanged;
 
@@ -24,8 +29,8 @@ namespace VendingMachine.UI.Client
 
             var fileItem = new MenuItem("File");
             fileItem.MenuItems.Add("New Vending Machine", NewVendingMachineMenuItem_Click);
-            fileItem.MenuItems.Add("Open Vending Machine");
-            fileItem.MenuItems.Add("Save Vending Machine");
+            fileItem.MenuItems.Add("Open Vending Machine", OpenVendingMachineMenuItem_Click);
+            fileItem.MenuItems.Add("Save Vending Machine", SaveVendingMachineStateMenuItem_Click);
 
             var toolsItem = new MenuItem("Tools");
             toolsItem.MenuItems.Add("Configuration", ConfigurationMenuItem_Click);
@@ -53,6 +58,51 @@ namespace VendingMachine.UI.Client
         private void NewVendingMachineMenuItem_Click(object sender, EventArgs args)
         {
             Model.NewVendingMachine();
+        }
+
+        private void OpenVendingMachineMenuItem_Click(object sender, EventArgs args)
+        {
+            var states = Model.GetVendingMachineStates();
+
+            var vendingMachinesStatesViewModel = new VendingMachinesStatesViewModel(states);
+
+            var statesView = new VendingMachinesStatesView(vendingMachinesStatesViewModel)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            var popup = new Form
+            {
+                AutoSize = true
+            };
+
+            popup.Controls.Add(statesView);
+
+            vendingMachinesStatesViewModel.StateOpeningRequested += (s, e) =>
+            {
+                popup.Close();
+                Model.OpenState(e.Value);
+            };
+
+            popup.ShowDialog();
+        }
+
+        private void SaveVendingMachineStateMenuItem_Click(object sender, EventArgs args)
+        {
+            string name = Model.CurrentVendingMachineName;
+
+            if (name == null)
+            {
+                name = Interaction.InputBox("Please provide a name for this vending machine", "Vending machine name");
+
+                // If cancelled.
+                if (name == "")
+                {
+                    return;
+                }
+            }
+
+            Model.SaveVendingMachineState(name);
         }
 
         private void ConfigurationMenuItem_Click(object sender, EventArgs args)

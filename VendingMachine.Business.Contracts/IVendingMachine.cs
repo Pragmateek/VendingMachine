@@ -9,6 +9,7 @@ namespace VendingMachine.Business.Contracts
     {
         ICatalog Catalog { get; }
         IEnumerable<ICoinType> AcceptedCoinsTypes { get; }
+        decimal InsertedAmount { get; }
         IStore Store { get; }
         ICashRegister CashRegister { get; }
         IControlPanel ControlPanel { get; }
