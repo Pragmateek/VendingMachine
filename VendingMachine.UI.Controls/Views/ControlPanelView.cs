@@ -5,6 +5,7 @@ using VendingMachine.Business.Contracts;
 using VendingMachine.Business.Implementation;
 using VendingMachine.Tools;
 using VendingMachine.UI.Controls.ViewModels;
+using VendingMachine.Data;
 
 namespace VendingMachine.UI.Controls
 {
@@ -26,11 +27,13 @@ namespace VendingMachine.UI.Controls
                 BorderStyle = BorderStyle.FixedSingle
             };
             insertedAmountView.DataBindings.Add("Text", this, "Model.InsertedAmountText");
-
+            // May God forgives us this trick!
+            var phonyCoin = new CoinType("INSERT A COIN", CurrenciesRepository.CHF, 0);
+            var coinsTypes = new[] { phonyCoin }.Concat(Model.ControlPanel.AcceptedCoinsTypes).ToArray();
             coinsInput = new ComboBox
             {
-                DataSource = Model.ControlPanel.AcceptedCoinsTypes.ToArray(),
-                Dock = DockStyle.Fill
+                DataSource = coinsTypes,
+                Dock = DockStyle.Fill,
             };
             coinsInput.SelectionChangeCommitted += CoinsInput_SelectionChangeCommitted;
 
@@ -93,7 +96,7 @@ namespace VendingMachine.UI.Controls
 
             Model.ControlPanel.TryInsert(coin);
 
-            coinsInput.SelectedItem = null;
+            coinsInput.SelectedIndex = 0;
         }
     }
 }
