@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Business.Imp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Tests", "VendingMachine.Tests\VendingMachine.Tests.csproj", "{CE1DC529-C960-448E-BBA5-829D3F6E66ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Data", "VendingMachine.Data\VendingMachine.Data.csproj", "{2EE5ACA9-2706-4AE2-94E5-863DE37F4077}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Repositories", "VendingMachine.Data\VendingMachine.Repositories.csproj", "{2EE5ACA9-2706-4AE2-94E5-863DE37F4077}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.LombardOdier", "VendingMachine.LombardOdier\VendingMachine.LombardOdier.csproj", "{1AD09F35-E013-4FF3-8D74-8CB015D95EA8}"
 EndProject

@@ -47,9 +47,15 @@ This may not be optimal as we'll prefer to keep the maximum variety of coins to 
 As an example if we have only 50c and 20c coins, 15n of each, and we request change on 1.50$ with the algorithm we'll get only 5n changes.  
 Indeed each time we request 1.50$ we'll get 3 coins of 50c, without touching the 20c coins, and once the 50c coins are exhausted we can't make 1.50$ with 20c coins.  
 But if we instead make 1.50$ with 5 coins of 20c and one of 50c we'll get 3n changes before exhausting the 20c coins, remains 12n 50c coins with which we can make another 4n changes, so a total of 7n changes, using all the coins.
-## Data management
+## Persistence management
 All the data related features like database persistence are in the VendingMachine.Data project
-### Data repositories
+### Entities repositories
+Business entities are made available through **repositories**.  
+A **repository** represents a store for business entities which abstracts the way they are stored (static data in assembly metadata, database records, XML files...) and provide common services to store new entities, update existing one, and retrieve them.
+
+As an example **coins types** and **currencies** are exposed through static metadata as there are few in the **business domain**.
+**Products** are exposed in the same manner, but in general database records would be a better fit as they could be changed and new ones added.
+As for **vending-machines** there is no way they can be stored in static metadata, as the goal is precisely to generate, change, and persist new ones.
 ## UI implementation
 ### MVVM pattern
 #### Rationales

@@ -94,9 +94,9 @@
       <Project>{84601ca9-cb96-4d7b-9981-980a755057eb}</Project>
       <Name>VendingMachine.Business.Implementation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VendingMachine.Data\VendingMachine.Data.csproj">
+    <ProjectReference Include="..\VendingMachine.Data\VendingMachine.Repositories.csproj">
       <Project>{2ee5aca9-2706-4ae2-94e5-863de37f4077}</Project>
-      <Name>VendingMachine.Data</Name>
+      <Name>VendingMachine.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\VendingMachine.LombardOdier\VendingMachine.LombardOdier.csproj">
       <Project>{1ad09f35-e013-4ff3-8d74-8cb015d95ea8}</Project>
