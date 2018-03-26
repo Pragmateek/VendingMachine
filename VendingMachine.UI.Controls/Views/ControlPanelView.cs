@@ -36,6 +36,7 @@ namespace VendingMachine.UI.Controls
 
             var refundInput = new Button
             {
+                Text = "REFUND",
                 Dock = DockStyle.Fill
             };
             refundInput.DataBindings.Add("Enabled", this, "Model.ControlPanel.CanRefund");
@@ -57,7 +58,8 @@ namespace VendingMachine.UI.Controls
             };
             layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
             layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+            layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            //layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
             layout.RowStyles.Add(new RowStyle(SizeType.Percent, 80));
 
             layout.Controls.Add(insertedAmountView, 0, 0);
