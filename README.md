@@ -33,7 +33,8 @@ It will first try to get the maximum number of highest value coins, then reduce 
 Say we have:
 - n coins of 1$,
 - n coins of 50c,
-- n coins of 20c.  
+- n coins of 20c.
+
 If we need to change 2.10$:
 - the algorithm will first try to take 2 coins of 1$ looking for the remaining 10c in lower valued coins, but as there is no 10c or 5c coins it won't make a match,
 - then it tries with only 1 coin of 1$, but 2 coins of 50c, the maximum it can get, but again it won't match as there is no 10c or 5c coins,
